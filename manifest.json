@@ -56,23 +56,23 @@
     "version": "0.9.0"
   },
   "photocraft": {
-    "dir": "0.11.1-zc5d69cb8",
-    "id": "c5d69cb8",
+    "dir": "0.11.1-zb4b5734d",
+    "id": "b4b5734d",
     "patches": [
       {
         "patch": "zuujiscom/photocraft:fix/web-crash-recovery",
         "why": "The web build never autosaved: no recovery storage, and its autosave timer never fired (now_ms() is 0 on wasm), so a reload or crashed tab lost unsaved documents (storytold/photocraft#6615). Uses craft-web-recovery from the craft-libs override."
       },
       {
-        "patch": "zuujiscom/craft-libs:web-recovery@ffba040ead",
+        "patch": "zuujiscom/craft-libs:web-recovery@5cc4669c18",
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.11.1-zc5d69cb8",
-    "sha256": "5b90b4d230255d440256cb4bc86efeaf308489e476b85573243c188b9c64faeb",
-    "source": "ed0433c2303005d41ca9d841a7b5c27c6d2a43b7",
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.11.1-zb4b5734d",
+    "sha256": "2e9276675db78874c1902f34fb842ae967e9523ed73f6b56785b96bee0762db3",
+    "source": "63fb44b58b4cd5f4373d03dbe51564a89fcc92f2",
     "upstream_tag": "v0.11.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.11.1-zc5d69cb8/photocraft-web-0.11.1.zip",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.11.1-zb4b5734d/photocraft-web-0.11.1.zip",
     "version": "0.11.1"
   },
   "vectorcraft": {
@@ -92,23 +92,23 @@
     "version": "0.13.1"
   },
   "wordcraft": {
-    "dir": "0.8.0-zdac50a72",
-    "id": "dac50a72",
+    "dir": "0.8.0-z11955cc7",
+    "id": "11955cc7",
     "patches": [
       {
         "patch": "zuujiscom/wordcraft:fix/web-recovery",
         "why": "The web build had no crash recovery: edits were lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and reopened after a reload or crash"
       },
       {
-        "patch": "zuujiscom/craft-libs:web-recovery@ffba040ead",
+        "patch": "zuujiscom/craft-libs:web-recovery@5cc4669c18",
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.8.0-zdac50a72",
-    "sha256": "156584a556200294e8abe215a4a50bb0826ba12f230ec549571bcb0d9c3dd463",
-    "source": "57b9d014d559e0636d239da0e73cf920cafda0b5",
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.8.0-z11955cc7",
+    "sha256": "9b009da46481d4446150819c97af78dba02a84dd5b2d0d8be1aa85506ab80008",
+    "source": "a5d056a3c599c8876a1075d7e7a07f381c8611b4",
     "upstream_tag": "v0.8.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/wordcraft-0.8.0-zdac50a72/wordcraft-web-0.8.0.zip",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/wordcraft-0.8.0-z11955cc7/wordcraft-web-0.8.0.zip",
     "version": "0.8.0"
   }
 }
