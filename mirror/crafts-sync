@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+# Mirrors the browser builds of the storytold/ArtCraft apps: for each app, find the latest GitHub
+# release, download <app>-web-<ver>.zip, unpack it beside the older versions and flip a symlink.
+# Uses the github.com release redirect (not the API) so there is no rate limit to hit.
+# An app listed in craft-web-overrides' manifest.json is served from that repo's patched build instead
+# (checked against the manifest's sha256); the last manifest read is kept, so a failed fetch changes nothing.
+# Source: https://github.com/zuujiscom/craft-web-overrides (mirror/).
+set -u
+ROOT=${CRAFTS_ROOT:-/srv/crafts}
+OWNER=storytold
+KEEP=3
+APPS="photocraft filmcraft lightcraft vectorcraft pdfcraft effectcraft designcraft wordcraft gridcraft deckcraft cadcraft soundcraft"
+[ -n "${CRAFTS_APPS:-}" ] && APPS=$CRAFTS_APPS
+MANIFEST_URL=${CRAFTS_MANIFEST_URL:-https://raw.githubusercontent.com/zuujiscom/craft-web-overrides/main/manifest.json}
+
+mkdir -p "$ROOT/apps" "$ROOT/www" "$ROOT/tmp"
+exec 9>"$ROOT/.lock"
+flock -n 9 || { echo "another sync is running"; exit 0; }
+log() { echo "$(date -u +%FT%TZ) $*"; }
+
+# overrides: one "app dir url sha256 release" line per patched app
+if curl -fsS --max-time 30 -o "$ROOT/tmp/manifest.json" "$MANIFEST_URL" && python3 -c 'import json,sys; json.load(open(sys.argv[1]))' "$ROOT/tmp/manifest.json"; then
+  mv -f "$ROOT/tmp/manifest.json" "$ROOT/overrides.json"
+else
+  log "could not read the overrides manifest; using the last one"
+fi
+overrides=""
+[ -f "$ROOT/overrides.json" ] && overrides=$(python3 -c '
+import json, sys
+for app, e in json.load(open(sys.argv[1])).items():
+    print(app, e["dir"], e["url"], e["sha256"], e["release"])' "$ROOT/overrides.json")
+override() { printf '%s\n' "$overrides" | awk -v a="$1" '$1 == a'; }
+
+changed=0
+for app in $APPS; do
+  o=$(override "$app")
+  if [ -n "$o" ]; then
+    read -r _ ver url sum _ <<<"$o"
+    tag="$ver (craft-web-overrides)"
+  else
+    tag=$(curl -fsS --max-time 30 -o /dev/null -w '%{redirect_url}' "https://github.com/$OWNER/$app/releases/latest" | sed 's|.*/tag/||')
+    if [ -z "$tag" ]; then log "$app: could not read latest release, skipping"; continue; fi
+    ver=${tag#v}
+    url="https://github.com/$OWNER/$app/releases/download/$tag/$app-web-$ver.zip"
+    sum=""
+  fi
+  dest="$ROOT/apps/$app/versions/$ver"
+  if [ -f "$dest/.complete" ]; then
+    # make sure the public link points at it (first run, or a previous swap was interrupted)
+    [ "$(readlink "$ROOT/www/$app" 2>/dev/null)" = "../apps/$app/versions/$ver" ] || {
+      ln -sfn "../apps/$app/versions/$ver" "$ROOT/www/.$app.new" && mv -T "$ROOT/www/.$app.new" "$ROOT/www/$app"; changed=1; }
+    continue
+  fi
+  log "$app: new release $tag"
+  work=$(mktemp -d "$ROOT/tmp/$app.XXXXXX")
+  zip="$work/$app-web-$ver.zip"
+  if ! curl -fsSL --max-time 900 -o "$zip" "$url"; then
+    log "$app: download failed"; rm -rf "$work"; continue
+  fi
+  if [ -n "$sum" ] && [ "$(sha256sum "$zip" | cut -d' ' -f1)" != "$sum" ]; then
+    log "$app: $url doesn't match the manifest's sha256, skipping"; rm -rf "$work"; continue
+  fi
+  if ! unzip -tq "$zip" >/dev/null 2>&1; then log "$app: zip failed integrity check"; rm -rf "$work"; continue; fi
+  unzip -q "$zip" -d "$work/x" || { log "$app: unzip failed"; rm -rf "$work"; continue; }
+  # the zip holds one top-level folder named <app>-web-<ver>
+  inner=$(find "$work/x" -mindepth 1 -maxdepth 1 -type d | head -1)
+  if [ -z "$inner" ] || [ ! -f "$inner/index.html" ]; then log "$app: no index.html in release, skipping"; rm -rf "$work"; continue; fi
+  # drop Rust build output some releases ship by mistake (LightCraft 0.6.0 had ~200 MB of it)
+  for junk in .fingerprint build deps incremental; do rm -rf "$inner/$junk"; done
+  # precompress so nginx can serve gzip_static
+  find "$inner" -type f \( -name '*.wasm' -o -name '*.js' -o -name '*.html' -o -name '*.css' -o -name '*.otf' -o -name '*.ttf' -o -name '*.json' -o -name '*.svg' \) \
+    ! -name '*.gz' -print0 | while IFS= read -r -d '' f; do [ -e "$f.gz" ] || gzip -9 -k -n "$f"; done
+  mkdir -p "$ROOT/apps/$app/versions"
+  rm -rf "$dest"; mv "$inner" "$dest"; touch "$dest/.complete"
+  ln -sfn "../apps/$app/versions/$ver" "$ROOT/www/.$app.new" && mv -T "$ROOT/www/.$app.new" "$ROOT/www/$app"
+  rm -rf "$work"
+  # prune old versions, newest first by mtime
+  ls -1dt "$ROOT/apps/$app/versions"/*/ | tail -n +$((KEEP+1)) | xargs -r rm -rf
+  log "$app: now serving $ver"
+  changed=1
+done
+
+# brotli copies of the big files (nginx serves them to browsers that accept br). Covers new
+# releases and backfills older version folders; existing .br files (some releases ship them) are kept.
+if command -v brotli >/dev/null 2>&1; then
+  find "$ROOT/apps" -type f \( -name '*.wasm' -o -name '*.js' -o -name '*.otf' -o -name '*.ttf' \) \
+    ! -name '*.br' -print0 | while IFS= read -r -d '' f; do
+      [ -e "$f.br" ] || { nice -n 10 brotli -q 11 -k -f -o "$f.br.tmp" "$f" && mv -f "$f.br.tmp" "$f.br"; log "brotli: ${f#$ROOT/apps/}"; }
+    done
+fi
+
+# landing page
+{
+  cat <<'HTML'
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Craft apps in the browser</title>
+<style>:root{color-scheme:light dark;--bg:#fff;--fg:#1c1c1e;--mut:#6b6b70;--card:#f4f4f6;--bd:#dcdce0}
+@media(prefers-color-scheme:dark){:root{--bg:#161618;--fg:#ececf0;--mut:#9a9aa2;--card:#222226;--bd:#38383e}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px}h1{margin:0 0 4px}p.s{color:var(--mut);margin:0 0 28px}
+ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+a.c{display:block;padding:14px 16px;background:var(--card);border:1px solid var(--bd);border-radius:10px;color:inherit;text-decoration:none}
+a.c:hover{border-color:var(--fg)}b{display:block;font-size:17px}span{color:var(--mut);font-size:13px}
+footer{margin-top:32px;color:var(--mut);font-size:13px}
+.n{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:0 0 24px;font-size:15px}.n b{display:inline}</style></head><body><main>
+<h1>Craft apps in the browser</h1>
+<p class="s">Open-source creative apps from ArtCraft, running entirely in your browser.</p>
+<div class="n"><b>Your files stay on your computer.</b> This site only delivers the apps. Opening a file reads it locally and Save or Export downloads it to your device; this server never receives your documents, and there is no account or cloud storage.
+<br><b>Save before you close the tab.</b> The web versions have no autosave or crash recovery, so unsaved work is lost on reload. Settings are kept in your browser's local storage.
+<br>Some apps may download optional extras, such as fonts or AI models, from the internet when you use those features.</div><ul>
+HTML
+  for app in $APPS; do
+    [ -L "$ROOT/www/$app" ] || continue
+    v=$(basename "$(readlink "$ROOT/www/$app")")
+    case $v in *-z*) v="${v%-z*} with fixes";; esac
+    printf '<li><a class="c" href="/%s/"><b>%s</b><span>version %s</span></a></li>\n' "$app" "$app" "$v"
+  done
+  cat <<'HTML'
+</ul><footer>Unofficial web hosting of the open-source builds from <a href="https://github.com/storytold">github.com/storytold</a>
+(MIT or Apache-2.0). Updated automatically when a new release is published. Apps marked "with fixes" carry patches
+that aren't in a storytold release yet: <a href="https://github.com/zuujiscom/craft-web-overrides">craft-web-overrides</a>.
+These apps keep no autosave in the browser.</footer>
+</main></body></html>
+HTML
+} > "$ROOT/www/.index.new" && mv -f "$ROOT/www/.index.new" "$ROOT/www/index.html"
+[ $changed = 1 ] && log "sync finished with changes" || true

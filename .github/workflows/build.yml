@@ -1,0 +1,107 @@
+name: Build overrides
+
+# Rebuilds an app's web zip when its newest storytold release or its patches change (prepare.py decides),
+# and checks for new storytold releases every 3 hours.
+on:
+  push:
+    branches: [main]
+    paths: [overrides.json, tools/**, .github/workflows/build.yml]
+  schedule:
+    - cron: "41 */3 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild every app even when nothing changed"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-overrides
+  cancel-in-progress: false
+
+jobs:
+  apps:
+    runs-on: ubuntu-latest
+    outputs:
+      apps: ${{ steps.list.outputs.apps }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - id: list
+        run: echo "apps=$(python3 -c 'import json; print(json.dumps(sorted(json.load(open("overrides.json")))))')" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: apps
+    if: needs.apps.outputs.apps != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        app: ${{ fromJSON(needs.apps.outputs.apps) }}
+    env:
+      CARGO_TERM_COLOR: always
+      CARGO_INCREMENTAL: 0
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: overrides
+      - id: prep
+        name: Apply patches to the newest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 overrides/tools/prepare.py "${{ matrix.app }}" --src src --out "result-${{ matrix.app }}" ${{ inputs.force && '--force' || '' }} >> "$GITHUB_OUTPUT"
+      - if: steps.prep.outputs.build == 'true'
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
+        with:
+          toolchain: stable
+          targets: wasm32-unknown-unknown
+      - if: steps.prep.outputs.build == 'true'
+        uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          workspaces: src
+          key: web-${{ matrix.app }}
+      - if: steps.prep.outputs.build == 'true'
+        uses: storytold/craft-common-actions/actions/install-trunk@main
+      - if: steps.prep.outputs.build == 'true'
+        name: Build and zip (packaging/web/package.sh, as storytold's release does)
+        working-directory: src
+        env:
+          VERSION: ${{ steps.prep.outputs.version }}
+        run: |
+          app=$(echo "${{ matrix.app }}" | tr '[:lower:]' '[:upper:]')
+          export BUILD_DATE=$(date -u +%Y-%m-%d) BUILD_SHA=$(git rev-parse HEAD)
+          export "${app}_VERSION=$VERSION" "${app}_BUILD_DATE=$BUILD_DATE" "${app}_BUILD_SHA=$BUILD_SHA"
+          packaging/web/package.sh
+          ls -la dist/release
+          cp dist/release/${{ matrix.app }}-web-*.zip "../result-${{ matrix.app }}/"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: result-${{ matrix.app }}
+          path: result-${{ matrix.app }}/
+          if-no-files-found: error
+
+  publish:
+    needs: [apps, build]
+    if: always() && needs.apps.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: result-*
+          path: results
+      - name: Release the builds, update manifest.json and STATUS.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/publish.py results
+      - name: Commit
+        run: |
+          git config user.name zuujiscom
+          git config user.email zuujis@gmail.com
+          git add manifest.json STATUS.md
+          git diff --cached --quiet || { git commit -q -m "Update manifest and status" && git push; }

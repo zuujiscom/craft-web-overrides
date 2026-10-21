@@ -1,0 +1,22 @@
+{
+  "deckcraft": {
+    "patches": [
+      {
+        "pr": 977,
+        "why": "0.8.0's web build panics at startup: std::process::id() has no pid on wasm32 (storytold/deckcraft#959)"
+      }
+    ]
+  },
+  "effectcraft": {
+    "patches": [
+      {
+        "pr": 1705,
+        "why": "One shader module for every kernel: a single kernel a browser rejects takes the whole GPU compositor down (Safari), and Chrome's GPU watchdog loses the device (storytold/effectcraft#1590)"
+      },
+      {
+        "branch": "zuujiscom/effectcraft:fix/median-packed-histogram",
+        "why": "Safari's WebGPU refuses fxn_median_huang: its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables"
+      }
+    ]
+  }
+}

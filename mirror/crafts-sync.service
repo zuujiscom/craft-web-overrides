@@ -1,0 +1,11 @@
+[Unit]
+Description=Sync storytold Craft app web builds
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/usr/local/bin/crafts-sync
+Nice=10
+TimeoutStartSec=1800
