@@ -6,9 +6,16 @@ app, except the apps listed in [`manifest.json`](manifest.json), which it serves
 
 ## How it works
 
-1. [`overrides.json`](overrides.json) lists, per app, the patches to apply. A patch is an upstream pull request
-   (`"pr": 977`) or a branch anywhere on GitHub (`"branch": "owner/repo:branch"`); its commits are the ones
-   between storytold's `main` and the patch head. `why` says what it fixes.
+1. [`overrides.json`](overrides.json) lists, under `apps`, the patches to apply per app. A patch is an upstream
+   pull request (`"pr": 977`) or a branch anywhere on GitHub (`"branch": "owner/repo:branch"`); its commits are the
+   ones between storytold's `main` and the patch head. `why` says what it fixes.
+
+   Under `libs` are **library overrides**: a branch of a shared library (our
+   [craft-libs](https://github.com/zuujiscom/craft-libs) fork) that app patches depend on with
+   `git = "https://github.com/zuujiscom/craft-libs", branch = "…"`. Every build moves those dependencies to the
+   branch's newest commit, and that commit is part of the build id, so a fix in the library rebuilds every app
+   that uses it. Code several apps need (the web builds' crash-recovery autosave, `craft-web-recovery`) lives
+   there once; each app's patch only hooks it up.
 2. [`.github/workflows/build.yml`](.github/workflows/build.yml) runs on every change here and every 3 hours.
    For each app, [`tools/prepare.py`](tools/prepare.py) checks out the newest storytold release tag and
    cherry-picks the patches onto it:
@@ -16,6 +23,7 @@ app, except the apps listed in [`manifest.json`](manifest.json), which it serves
    - when every patch of an app is dropped, the app leaves the manifest and the mirror goes back to
      storytold's own zip;
    - a patch that no longer applies fails that app's build, and the mirror keeps serving the last good one.
+   - an app whose patched `Cargo.lock` uses a library override gets that library's newest commit.
 3. The app is built the way storytold's release workflow builds it (`packaging/web/package.sh`, stable Rust,
    the same Trunk), only when its release tag or patch commits changed.
 4. [`tools/publish.py`](tools/publish.py) publishes the zip as a release `<app>-<version>-z<id>`, records its

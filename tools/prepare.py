@@ -8,12 +8,16 @@ Writes <result dir>/result.json and prints `build=true|false` for $GITHUB_OUTPUT
   non-merge commits between storytold's main and the patch head, cherry-picked in order;
 - a patch whose PR merged before the release, or whose commits are all already in the release (same patch id),
   is dropped; when every patch is dropped the app needs no override (`status: upstream`);
-- `id` hashes the release tag and the applied commits, so the same inputs never build twice: `build=false` when
-  the manifest already has that id (unless --force).
+- a library override (`libs`: "owner/repo:branch") is used by an app whose patches depend on that branch (its
+  Cargo.lock has `git+https://github.com/<owner>/<repo>?branch=<branch>#<commit>`): its lock entries are moved
+  to the branch's newest commit in the checkout, so a library fix rebuilds every app that uses it without touching
+  the app patches (the web build isn't `--locked`, so cargo itself adds a dependency the library gained);
+- `id` hashes the release tag, the applied commits and the library commits, so the same inputs never build twice:
+  `build=false` when the manifest already has that id (unless --force).
 A patch that doesn't apply fails the run; the mirror keeps serving the last good build.
 Needs git, and GH_TOKEN for the GitHub API (only public data is read).
 """
-import argparse, hashlib, json, os, subprocess, sys, urllib.request
+import argparse, hashlib, json, os, re, subprocess, sys, urllib.request
 
 UPSTREAM = "storytold"
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -54,6 +58,34 @@ def patch_commits(src, app, patch):
     return label, commits
 
 
+def lib_uses(src, libs):
+    """Point this checkout's Cargo.lock at each library override's newest commit; the ones used:
+    [{lib, branch, why, commit, packages}]."""
+    lock_path = os.path.join(src, "Cargo.lock")
+    lock = open(lock_path).read() if os.path.exists(lock_path) else ""
+    uses = []
+    for name, lib in sorted(libs.items()):
+        repo, _, branch = lib["branch"].partition(":")
+        source = f"git+https://github.com/{repo}?branch={branch}#"
+        packages, current = [], None
+        for line in lock.splitlines():
+            if line.startswith("name = "):
+                current = line.split('"')[1]
+            elif line.startswith(f'source = "{source}') and current:
+                packages.append(current)
+        if not packages:
+            continue
+        r = subprocess.run(["git", "ls-remote", f"https://github.com/{repo}.git", f"refs/heads/{branch}"], capture_output=True, text=True)
+        commit = r.stdout.split()[0] if r.returncode == 0 and r.stdout.split() else None
+        if not commit:
+            sys.exit(f"library override {lib['branch']}: branch not found\n{r.stderr}")
+        lock = re.sub(re.escape(source) + r"[0-9a-f]{40}", source + commit, lock)
+        uses.append({"lib": name, "branch": lib["branch"], "why": lib.get("why", ""), "commit": commit, "packages": sorted(set(packages))})
+    if uses:
+        open(lock_path, "w").write(lock)
+    return uses
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("app")
@@ -64,7 +96,7 @@ def main():
     a = ap.parse_args()
 
     overrides = json.load(open(os.path.join(ROOT, "overrides.json")))
-    patches = overrides[a.app]["patches"]
+    patches = overrides["apps"][a.app]["patches"]
     manifest = json.load(open(a.manifest)) if os.path.exists(a.manifest) else {}
     tag = api(f"repos/{UPSTREAM}/{a.app}/releases/latest")["tag_name"]
 
@@ -96,9 +128,11 @@ def main():
                 sys.exit(f"{label}: commit {c[:10]} doesn't apply to {tag}; update the patch or drop it.\n{r.stdout}{r.stderr}")
         applied.append({"patch": label, "why": patch.get("why", ""), "commits": todo})
 
+    libs = lib_uses(a.src, overrides.get("libs", {})) if applied else []
     version = tag.lstrip("v")
-    ident = hashlib.sha256(json.dumps([tag, [p["commits"] for p in applied]]).encode()).hexdigest()[:8]
-    result = {"app": a.app, "tag": tag, "version": version, "id": ident, "applied": applied, "dropped": dropped,
+    inputs = [tag, [p["commits"] for p in applied]] + ([[u["commit"] for u in libs]] if libs else [])
+    ident = hashlib.sha256(json.dumps(inputs).encode()).hexdigest()[:8]
+    result = {"app": a.app, "tag": tag, "version": version, "id": ident, "applied": applied, "dropped": dropped, "libs": libs,
               "head": git(a.src, "rev-parse", "HEAD").stdout.strip(),
               "status": "patched" if applied else "upstream"}
     build = bool(applied) and (a.force or manifest.get(a.app, {}).get("id") != ident)

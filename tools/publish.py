@@ -27,6 +27,8 @@ def notes(r):
     lines = [f"{r['app']} {r['version']} (storytold {r['tag']}) with these patches:", ""]
     for p in r["applied"]:
         lines.append(f"- {p['patch']}: {p['why']} ({', '.join(c[:10] for c in p['commits'])})")
+    for u in r.get("libs", []):
+        lines.append(f"- library {u['branch']} at {u['commit'][:10]} ({', '.join(u['packages'])}): {u['why']}")
     for d in r["dropped"]:
         lines.append(f"- dropped {d['patch']}: {d['reason']}")
     return "\n".join(lines)
@@ -34,7 +36,7 @@ def notes(r):
 
 def main():
     results_dir = sys.argv[1]
-    overrides = json.load(open(os.path.join(ROOT, "overrides.json")))
+    overrides = json.load(open(os.path.join(ROOT, "overrides.json")))["apps"]
     path = os.path.join(ROOT, "manifest.json")
     manifest = json.load(open(path)) if os.path.exists(path) else {}
     status = []
@@ -63,7 +65,8 @@ def main():
             "dir": f"{r['version']}-z{r['id']}", "version": r["version"], "id": r["id"], "upstream_tag": r["tag"],
             "url": f"https://github.com/{REPO}/releases/download/{tag}/{name}", "sha256": sha256(zips[0]),
             "release": f"https://github.com/{REPO}/releases/tag/{tag}", "source": r["head"],
-            "patches": [{"patch": p["patch"], "why": p["why"]} for p in r["applied"]],
+            "patches": [{"patch": p["patch"], "why": p["why"]} for p in r["applied"]]
+            + [{"patch": f"{u['branch']}@{u['commit'][:10]}", "why": u["why"]} for u in r.get("libs", [])],
         }
         status.append((app, f"built {tag}"))
     for app in [a for a in manifest if a not in overrides]:

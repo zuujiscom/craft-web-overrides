@@ -1,30 +1,38 @@
 {
-  "deckcraft": {
-    "patches": [
-      {
-        "pr": 977,
-        "why": "0.8.0's web build panics at startup: std::process::id() has no pid on wasm32 (storytold/deckcraft#959)"
-      }
-    ]
+  "libs": {
+    "craft-libs": {
+      "branch": "zuujiscom/craft-libs:web-recovery",
+      "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
+    }
   },
-  "effectcraft": {
-    "patches": [
-      {
-        "pr": 1705,
-        "why": "One shader module for every kernel: a single kernel a browser rejects takes the whole GPU compositor down (Safari), and Chrome's GPU watchdog loses the device (storytold/effectcraft#1590)"
-      },
-      {
-        "branch": "zuujiscom/effectcraft:fix/median-packed-histogram",
-        "why": "Safari's WebGPU refuses fxn_median_huang: its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables"
-      }
-    ]
-  },
-  "photocraft": {
-    "patches": [
-      {
-        "branch": "zuujiscom/photocraft:fix/web-crash-recovery",
-        "why": "The web build never autosaved: no recovery storage, and its autosave timer never fired (now_ms() is 0 on wasm), so a reload or crashed tab lost unsaved documents (storytold/photocraft#6615)"
-      }
-    ]
+  "apps": {
+    "deckcraft": {
+      "patches": [
+        {
+          "pr": 977,
+          "why": "0.8.0's web build panics at startup: std::process::id() has no pid on wasm32 (storytold/deckcraft#959)"
+        }
+      ]
+    },
+    "effectcraft": {
+      "patches": [
+        {
+          "pr": 1705,
+          "why": "One shader module for every kernel: a single kernel a browser rejects takes the whole GPU compositor down (Safari), and Chrome's GPU watchdog loses the device (storytold/effectcraft#1590)"
+        },
+        {
+          "branch": "zuujiscom/effectcraft:fix/median-packed-histogram",
+          "why": "Safari's WebGPU refuses fxn_median_huang: its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables"
+        }
+      ]
+    },
+    "photocraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/photocraft:fix/web-crash-recovery",
+          "why": "The web build never autosaved: no recovery storage, and its autosave timer never fired (now_ms() is 0 on wasm), so a reload or crashed tab lost unsaved documents (storytold/photocraft#6615). Uses craft-web-recovery from the craft-libs override."
+        }
+      ]
+    }
   }
 }
