@@ -94,13 +94,15 @@ fi
   cat <<'HTML'
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Craft apps in the browser</title>
-<style>:root{color-scheme:light dark;--bg:#fff;--fg:#1c1c1e;--mut:#6b6b70;--card:#f4f4f6;--bd:#dcdce0}
-@media(prefers-color-scheme:dark){:root{--bg:#161618;--fg:#ececf0;--mut:#9a9aa2;--card:#222226;--bd:#38383e}}
+<style>:root{color-scheme:light dark;--bg:#fff;--fg:#1c1c1e;--mut:#6b6b70;--card:#f4f4f6;--bd:#dcdce0;--pt:#fde9c8;--pf:#7a4a00}
+@media(prefers-color-scheme:dark){:root{--bg:#161618;--fg:#ececf0;--mut:#9a9aa2;--card:#222226;--bd:#38383e;--pt:#4a3412;--pf:#f5c97a}}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
 main{max-width:860px;margin:0 auto;padding:40px 16px}h1{margin:0 0 4px}p.s{color:var(--mut);margin:0 0 28px}
 ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 a.c{display:block;padding:14px 16px;background:var(--card);border:1px solid var(--bd);border-radius:10px;color:inherit;text-decoration:none}
 a.c:hover{border-color:var(--fg)}b{display:block;font-size:17px}span{color:var(--mut);font-size:13px}
+em{font-style:normal;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;vertical-align:2px;margin-left:6px;padding:2px 6px;border-radius:5px;background:var(--pt);color:var(--pf)}
+a.w{display:inline-block;margin:6px 0 0 4px;font-size:13px;color:var(--mut)}
 footer{margin-top:32px;color:var(--mut);font-size:13px}
 .n{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:0 0 24px;font-size:15px}.n b{display:inline}</style></head><body><main>
 <h1>Craft apps in the browser</h1>
@@ -112,12 +114,16 @@ HTML
   for app in $APPS; do
     [ -L "$ROOT/www/$app" ] || continue
     v=$(basename "$(readlink "$ROOT/www/$app")")
-    case $v in *-z*) v="${v%-z*} with fixes";; esac
-    printf '<li><a class="c" href="/%s/"><b>%s</b><span>version %s</span></a></li>\n' "$app" "$app" "$v"
+    read -r _ odir _ _ orel <<<"$(override "$app")"
+    if [ -n "${odir:-}" ] && [ "$v" = "$odir" ]; then
+      printf '<li><a class="c" href="/%s/"><b>%s <em>patched</em></b><span>version %s with fixes not in a storytold release yet</span></a><a class="w" href="%s">What&#39;s patched</a></li>\n' "$app" "$app" "${v%-z*}" "$orel"
+    else
+      printf '<li><a class="c" href="/%s/"><b>%s</b><span>version %s</span></a></li>\n' "$app" "$app" "$v"
+    fi
   done
   cat <<'HTML'
 </ul><footer>Unofficial web hosting of the open-source builds from <a href="https://github.com/storytold">github.com/storytold</a>
-(MIT or Apache-2.0). Updated automatically when a new release is published. Apps marked "with fixes" carry patches
+(MIT or Apache-2.0). Updated automatically when a new release is published. Apps marked "patched" carry patches
 that aren't in a storytold release yet: <a href="https://github.com/zuujiscom/craft-web-overrides">craft-web-overrides</a>.
 These apps keep no autosave in the browser.</footer>
 </main></body></html>
