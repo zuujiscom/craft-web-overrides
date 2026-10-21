@@ -1,6 +1,6 @@
 # Status
 
-Last run 2026-10-21 23:05 UTC.
+Last run 2026-10-21 23:23 UTC.
 
 | App | Result |
 | --- | --- |
@@ -9,7 +9,7 @@ Last run 2026-10-21 23:05 UTC.
 | filmcraft | unchanged: 0.10.0-z88f6ba70 |
 | photocraft | unchanged: 0.12.0-z1b5ce648 |
 | vectorcraft | unchanged: 0.14.0-z0b4e56af |
-| wordcraft | failed: no result (see the run log); serving storytold's release |
+| wordcraft | built wordcraft-0.9.0-z5e3871ab |
 
 ## Served
 
@@ -18,3 +18,4 @@ Last run 2026-10-21 23:05 UTC.
 - **filmcraft** 0.10.0-z88f6ba70 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.10.0-z88f6ba70)): zuujiscom/filmcraft:fix/opfs-write-webkit
 - **photocraft** 0.12.0-z1b5ce648 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.12.0-z1b5ce648)): zuujiscom/photocraft:fix/web-crash-recovery; zuujiscom/craft-libs:web-recovery@fd0185e934
 - **vectorcraft** 0.14.0-z0b4e56af ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.14.0-z0b4e56af)): zuujiscom/vectorcraft:fix/web-recovery; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **wordcraft** 0.9.0-z5e3871ab ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.9.0-z5e3871ab)): zuujiscom/wordcraft:fix/web-recovery-0.9; zuujiscom/craft-libs:web-recovery@fd0185e934
