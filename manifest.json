@@ -94,25 +94,5 @@
     "upstream_tag": "v0.14.0",
     "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/vectorcraft-0.14.0-z0b4e56af/vectorcraft-web-0.14.0.zip",
     "version": "0.14.0"
-  },
-  "wordcraft": {
-    "dir": "0.8.0-ze90a773a",
-    "id": "e90a773a",
-    "patches": [
-      {
-        "patch": "zuujiscom/wordcraft:fix/web-recovery",
-        "why": "The web build had no crash recovery: edits were lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and reopened after a reload or crash"
-      },
-      {
-        "patch": "zuujiscom/craft-libs:web-recovery@fd0185e934",
-        "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
-      }
-    ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.8.0-ze90a773a",
-    "sha256": "a35c5344e9e7cc2e92a2d7b6c75b2bc7d06af1d2992d940d7d77c82ba03bfb51",
-    "source": "dcf5be56f18ab2cbd7403bf27efbecb7b4c9a565",
-    "upstream_tag": "v0.8.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/wordcraft-0.8.0-ze90a773a/wordcraft-web-0.8.0.zip",
-    "version": "0.8.0"
   }
 }
