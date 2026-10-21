@@ -61,7 +61,7 @@
     "wordcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/wordcraft:fix/web-recovery",
+          "branch": "zuujiscom/wordcraft:fix/web-recovery-0.9",
           "why": "The web build had no crash recovery: edits were lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and reopened after a reload or crash"
         }
       ]
