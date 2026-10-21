@@ -18,5 +18,13 @@
         "why": "Safari's WebGPU refuses fxn_median_huang: its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables"
       }
     ]
+  },
+  "photocraft": {
+    "patches": [
+      {
+        "branch": "zuujiscom/photocraft:fix/web-crash-recovery",
+        "why": "The web build never autosaved: no recovery storage, and its autosave timer never fired (now_ms() is 0 on wasm), so a reload or crashed tab lost unsaved documents (storytold/photocraft#6615)"
+      }
+    ]
   }
 }
