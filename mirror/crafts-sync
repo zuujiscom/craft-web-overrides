@@ -44,6 +44,10 @@ for app in $APPS; do
     url="https://github.com/$OWNER/$app/releases/download/$tag/$app-web-$ver.zip"
     sum=""
   fi
+  # $ver names a directory that gets replaced below (rm -rf), so it has to be a plain version
+  if ! [[ "$ver" =~ ^[0-9A-Za-z][0-9A-Za-z.+_-]*(-z[0-9a-f]+)?$ ]] || [[ "$ver" == *..* ]]; then
+    log "$app: version '$ver' isn't a plain version name, skipping"; continue
+  fi
   dest="$ROOT/apps/$app/versions/$ver"
   if [ -f "$dest/.complete" ]; then
     # make sure the public link points at it (first run, or a previous swap was interrupted)

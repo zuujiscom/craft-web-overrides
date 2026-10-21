@@ -64,7 +64,7 @@ jobs:
           workspaces: src
           key: web-${{ matrix.app }}
       - if: steps.prep.outputs.build == 'true'
-        uses: storytold/craft-common-actions/actions/install-trunk@main
+        uses: storytold/craft-common-actions/actions/install-trunk@fc9e47894eab01dd84fac5f625fef863a47e16ff # main on 2026-10-21
       - if: steps.prep.outputs.build == 'true'
         name: Build and zip (packaging/web/package.sh, as storytold's release does)
         working-directory: src

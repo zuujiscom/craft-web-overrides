@@ -20,6 +20,8 @@ Needs git, and GH_TOKEN for the GitHub API (only public data is read).
 import argparse, hashlib, json, os, re, subprocess, sys, urllib.request
 
 UPSTREAM = "storytold"
+# A release version becomes a git ref, a release name here and a directory name on the mirror.
+VERSION = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?")
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
@@ -99,6 +101,8 @@ def main():
     patches = overrides["apps"][a.app]["patches"]
     manifest = json.load(open(a.manifest)) if os.path.exists(a.manifest) else {}
     tag = api(f"repos/{UPSTREAM}/{a.app}/releases/latest")["tag_name"]
+    if not VERSION.fullmatch(tag.lstrip("v")) or ".." in tag:
+        sys.exit(f"{a.app}: release tag {tag!r} doesn't look like a version; not building it")
 
     if not os.path.isdir(os.path.join(a.src, ".git")):
         subprocess.run(["git", "clone", "-q", "--filter=blob:none", f"https://github.com/{UPSTREAM}/{a.app}.git", a.src], check=True)

@@ -9,11 +9,14 @@ the mirror goes back to storytold's own zip. So does an app whose prepare or bui
 as storytold shipped it beats an old patched build.
 Needs gh with GH_TOKEN (contents: write) and GITHUB_REPOSITORY.
 """
-import datetime, glob, hashlib, json, os, subprocess, sys
+import datetime, glob, hashlib, json, os, re, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 REPO = os.environ.get("GITHUB_REPOSITORY", "zuujiscom/craft-web-overrides")
+# Same as prepare.py's; the version and id end up in a release name and a directory name on the mirror.
+VERSION = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?")
+ID = re.compile(r"[0-9a-f]{8}")
 
 
 def sha256(path):
@@ -48,6 +51,13 @@ def main():
             status.append((app, "failed: no result (see the run log); serving storytold's release"))
             continue
         r = json.load(open(files[0]))
+        # The build job that uploaded result.json also ran the app's own build scripts, so check
+        # what it says before it names a release or a directory.
+        if r.get("app") != app or not VERSION.fullmatch(str(r.get("version"))) or ".." in str(r.get("version")) \
+                or not ID.fullmatch(str(r.get("id"))):
+            manifest.pop(app, None)
+            status.append((app, "failed: result.json doesn't match what prepare.py writes; serving storytold's release"))
+            continue
         if r["status"] == "upstream":
             manifest.pop(app, None)
             status.append((app, f"storytold {r['tag']} as released: " + "; ".join(f"{d['patch']} {d['reason']}" for d in r["dropped"])))
