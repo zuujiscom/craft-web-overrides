@@ -14,7 +14,7 @@ Writes <result dir>/result.json and prints `build=true|false` for $GITHUB_OUTPUT
   the app patches (the web build isn't `--locked`, so cargo itself adds a dependency the library gained);
 - `id` hashes the release tag, the applied commits and the library commits, so the same inputs never build twice:
   `build=false` when the manifest already has that id (unless --force).
-A patch that doesn't apply fails the run; the mirror keeps serving the last good build.
+A patch that doesn't apply fails the run; the mirror then serves storytold's release without patches.
 Needs git, and GH_TOKEN for the GitHub API (only public data is read).
 """
 import argparse, hashlib, json, os, re, subprocess, sys, urllib.request

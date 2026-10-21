@@ -22,7 +22,7 @@ app, except the apps listed in [`manifest.json`](manifest.json), which it serves
    - a patch whose PR was merged before that release, or whose commits are already in it, is dropped;
    - when every patch of an app is dropped, the app leaves the manifest and the mirror goes back to
      storytold's own zip;
-   - a patch that no longer applies fails that app's build, and the mirror keeps serving the last good one.
+   - a patch that no longer applies fails that app's build, and the mirror serves storytold's own release zip until the patch is fixed.
    - an app whose patched `Cargo.lock` uses a library override gets that library's newest commit.
 3. The app is built the way storytold's release workflow builds it (`packaging/web/package.sh`, stable Rust,
    the same Trunk), only when its release tag or patch commits changed.

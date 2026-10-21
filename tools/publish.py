@@ -5,7 +5,8 @@
 
 For an app built in this run: a release `<app>-<version>-z<id>` with the zip, and its manifest entry.
 An app whose patches are all dropped (`status: upstream`) or that left overrides.json leaves the manifest, so
-the mirror goes back to storytold's own zip. An app whose prepare or build failed keeps its old entry.
+the mirror goes back to storytold's own zip. So does an app whose prepare or build failed: the newest release
+as storytold shipped it beats an old patched build.
 Needs gh with GH_TOKEN (contents: write) and GITHUB_REPOSITORY.
 """
 import datetime, glob, hashlib, json, os, subprocess, sys
@@ -43,7 +44,8 @@ def main():
     for app in sorted(overrides):
         files = glob.glob(os.path.join(results_dir, f"result-{app}", "result.json"))
         if not files:
-            status.append((app, "failed: no result (see the run log); still serving the previous build" if app in manifest else "failed: no result (see the run log)"))
+            manifest.pop(app, None)
+            status.append((app, "failed: no result (see the run log); serving storytold's release"))
             continue
         r = json.load(open(files[0]))
         if r["status"] == "upstream":
@@ -55,7 +57,8 @@ def main():
             continue
         zips = glob.glob(os.path.join(results_dir, f"result-{app}", f"{app}-web-*.zip"))
         if len(zips) != 1:
-            status.append((app, f"failed: build gave {len(zips)} zips; still serving {manifest.get(app, {}).get('dir', 'storytold')}"))
+            manifest.pop(app, None)
+            status.append((app, f"failed: build gave {len(zips)} zips; serving storytold's release"))
             continue
         tag = f"{app}-{r['version']}-z{r['id']}"
         name = os.path.basename(zips[0])
