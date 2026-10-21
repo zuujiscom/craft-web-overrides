@@ -1,1 +1,38 @@
-{}
+{
+  "deckcraft": {
+    "dir": "0.8.0-z4692ca80",
+    "id": "4692ca80",
+    "patches": [
+      {
+        "patch": "storytold/deckcraft#977",
+        "why": "0.8.0's web build panics at startup: std::process::id() has no pid on wasm32 (storytold/deckcraft#959)"
+      }
+    ],
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/deckcraft-0.8.0-z4692ca80",
+    "sha256": "83f888eb738ac73073a05ef4ee02da5c6e8a66a910642b68ddafd938a0780345",
+    "source": "1b3a95b9e076588bdda63195ecdc0925042fc190",
+    "upstream_tag": "v0.8.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/deckcraft-0.8.0-z4692ca80/deckcraft-web-0.8.0.zip",
+    "version": "0.8.0"
+  },
+  "effectcraft": {
+    "dir": "0.11.1-z298f28f3",
+    "id": "298f28f3",
+    "patches": [
+      {
+        "patch": "storytold/effectcraft#1705",
+        "why": "One shader module for every kernel: a single kernel a browser rejects takes the whole GPU compositor down (Safari), and Chrome's GPU watchdog loses the device (storytold/effectcraft#1590)"
+      },
+      {
+        "patch": "zuujiscom/effectcraft:fix/median-packed-histogram",
+        "why": "Safari's WebGPU refuses fxn_median_huang: its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables"
+      }
+    ],
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.11.1-z298f28f3",
+    "sha256": "8f3fa7c4edc54d5e19f22bac17e9e8a12f0ddad5582c27d1ed8b71d7dbc49dbf",
+    "source": "a4efb42b40b8f4f0fcd82e1a41b3d12422207c00",
+    "upstream_tag": "v0.11.1",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/effectcraft-0.11.1-z298f28f3/effectcraft-web-0.11.1.zip",
+    "version": "0.11.1"
+  }
+}
