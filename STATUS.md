@@ -1,14 +1,14 @@
 # Status
 
-Last run 2026-10-21 08:25 UTC.
+Last run 2026-10-21 12:21 UTC.
 
 | App | Result |
 | --- | --- |
-| deckcraft | built deckcraft-0.9.0-z09f6060b |
-| effectcraft | built effectcraft-0.13.0-z4216c794 |
-| filmcraft | built filmcraft-0.10.0-z88f6ba70 |
+| deckcraft | unchanged: 0.9.0-z09f6060b |
+| effectcraft | unchanged: 0.13.0-z4216c794 |
+| filmcraft | unchanged: 0.10.0-z88f6ba70 |
 | photocraft | unchanged: 0.11.1-z090ef38b |
-| vectorcraft | built vectorcraft-0.14.0-z0b4e56af |
+| vectorcraft | unchanged: 0.14.0-z0b4e56af |
 | wordcraft | failed: no result (see the run log); still serving the previous build |
 
 ## Served
