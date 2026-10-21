@@ -76,19 +76,23 @@
     "version": "0.11.1"
   },
   "vectorcraft": {
-    "dir": "0.13.1-z7c4b2a9a",
-    "id": "7c4b2a9a",
+    "dir": "0.13.1-zb4e89689",
+    "id": "b4e89689",
     "patches": [
       {
         "patch": "zuujiscom/vectorcraft:fix/web-recovery",
         "why": "A reloaded or crashed tab's recovery copies were only offered after three save intervals (and only at startup), so they never appeared; offered at once now, and leaving with unsaved changes asks first"
+      },
+      {
+        "patch": "zuujiscom/craft-libs:web-recovery@fd0185e934",
+        "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.13.1-z7c4b2a9a",
-    "sha256": "4f2aa36a1e15027b339bb84e063811e87aa6af6b9acb77a882f44190268ab228",
-    "source": "9bb66d7ab2999cda79d02b4ade2fbb2366f691ac",
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.13.1-zb4e89689",
+    "sha256": "2fa4bd0739bae059fe8327cb76a880cd0c22858702f3961bb347df91c2344069",
+    "source": "742f21bc0b33e7974ac7f97e9dc0a69aa252c5bf",
     "upstream_tag": "v0.13.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/vectorcraft-0.13.1-z7c4b2a9a/vectorcraft-web-0.13.1.zip",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/vectorcraft-0.13.1-zb4e89689/vectorcraft-web-0.13.1.zip",
     "version": "0.13.1"
   },
   "wordcraft": {
