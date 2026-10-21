@@ -23,6 +23,10 @@
         {
           "branch": "zuujiscom/effectcraft:fix/median-packed-histogram",
           "why": "Safari's WebGPU refuses fxn_median_huang: its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables"
+        },
+        {
+          "branch": "zuujiscom/effectcraft:fix/second-tab",
+          "why": "A second tab restored the first tab's live project and overwrote its session snapshot (one slot per site); only the first tab keeps the session now, and the second says so"
         }
       ]
     },
@@ -31,6 +35,30 @@
         {
           "branch": "zuujiscom/photocraft:fix/web-crash-recovery",
           "why": "The web build never autosaved: no recovery storage, and its autosave timer never fired (now_ms() is 0 on wasm), so a reload or crashed tab lost unsaved documents (storytold/photocraft#6615). Uses craft-web-recovery from the craft-libs override."
+        }
+      ]
+    },
+    "filmcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/filmcraft:fix/opfs-write-webkit",
+          "why": "Safari writes the whole wasm heap to OPFS when given a view into it, so crash-recovery snapshots and meta were 15 MB of garbage and nothing was recovered; the bytes are copied first"
+        }
+      ]
+    },
+    "vectorcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/vectorcraft:fix/web-recovery",
+          "why": "A reloaded or crashed tab's recovery copies were only offered after three save intervals (and only at startup), so they never appeared; offered at once now, and leaving with unsaved changes asks first"
+        }
+      ]
+    },
+    "wordcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/wordcraft:fix/web-recovery",
+          "why": "The web build had no crash recovery: edits were lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and reopened after a reload or crash"
         }
       ]
     }
