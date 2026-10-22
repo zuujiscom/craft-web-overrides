@@ -1,6 +1,6 @@
 # Status
 
-Last run 2026-10-21 23:23 UTC.
+Last run 2026-10-22 02:01 UTC.
 
 | App | Result |
 | --- | --- |
@@ -9,7 +9,7 @@ Last run 2026-10-21 23:23 UTC.
 | filmcraft | unchanged: 0.10.0-z88f6ba70 |
 | photocraft | unchanged: 0.12.0-z1b5ce648 |
 | vectorcraft | unchanged: 0.14.0-z0b4e56af |
-| wordcraft | built wordcraft-0.9.0-z5e3871ab |
+| wordcraft | unchanged: 0.9.0-z5e3871ab |
 
 ## Served
 
