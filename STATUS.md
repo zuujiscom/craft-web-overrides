@@ -1,21 +1,19 @@
 # Status
 
-Last run 2026-10-22 17:37 UTC.
+Last run 2026-10-22 22:03 UTC.
 
 | App | Result |
 | --- | --- |
-| deckcraft | unchanged: 0.9.0-z09f6060b |
-| effectcraft | unchanged: 0.14.0-ze3943aca |
-| filmcraft | unchanged: 0.10.0-z88f6ba70 |
-| photocraft | unchanged: 0.12.0-z1b5ce648 |
-| vectorcraft | unchanged: 0.14.0-z0b4e56af |
-| wordcraft | unchanged: 0.9.0-z5e3871ab |
+| deckcraft | failed: no result (see the run log); serving storytold's release |
+| effectcraft | built effectcraft-0.15.0-zf42b46fe |
+| filmcraft | built filmcraft-0.11.0-z8e83ee8f |
+| photocraft | built photocraft-0.13.0-z5ebb898e |
+| vectorcraft | failed: no result (see the run log); serving storytold's release |
+| wordcraft | built wordcraft-0.10.0-z2b7f0f21 |
 
 ## Served
 
-- **deckcraft** 0.9.0-z09f6060b ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/deckcraft-0.9.0-z09f6060b)): storytold/deckcraft#977
-- **effectcraft** 0.14.0-ze3943aca ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.14.0-ze3943aca)): storytold/effectcraft#1705; zuujiscom/effectcraft:fix/median-packed-histogram; zuujiscom/effectcraft:fix/second-tab
-- **filmcraft** 0.10.0-z88f6ba70 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.10.0-z88f6ba70)): zuujiscom/filmcraft:fix/opfs-write-webkit
-- **photocraft** 0.12.0-z1b5ce648 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.12.0-z1b5ce648)): zuujiscom/photocraft:fix/web-crash-recovery; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **vectorcraft** 0.14.0-z0b4e56af ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.14.0-z0b4e56af)): zuujiscom/vectorcraft:fix/web-recovery; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **wordcraft** 0.9.0-z5e3871ab ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.9.0-z5e3871ab)): zuujiscom/wordcraft:fix/web-recovery-0.9; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **effectcraft** 0.15.0-zf42b46fe ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.15.0-zf42b46fe)): storytold/effectcraft#1705; zuujiscom/effectcraft:fix/median-packed-histogram; zuujiscom/effectcraft:fix/second-tab
+- **filmcraft** 0.11.0-z8e83ee8f ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.11.0-z8e83ee8f)): zuujiscom/filmcraft:fix/opfs-write-webkit
+- **photocraft** 0.13.0-z5ebb898e ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.13.0-z5ebb898e)): zuujiscom/photocraft:fix/web-crash-recovery; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **wordcraft** 0.10.0-z2b7f0f21 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.10.0-z2b7f0f21)): zuujiscom/wordcraft:fix/web-recovery-0.9; zuujiscom/craft-libs:web-recovery@fd0185e934
