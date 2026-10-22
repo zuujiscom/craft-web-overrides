@@ -1,0 +1,6 @@
+{
+  "7659": "calls check_budget with 3 arguments after #7838 added a 4th (transform_cmds.rs:341); dropped by the owner's choice, #7838 stays",
+  "5815": "changes Adjustment::Unsupported.raw to Arc<[u8]> but is 340 commits behind main: main's crates/io/tests/adjust_warnings.rs:70 and #6815's psd_export.rs test still build it from a Vec, so it does not compile; its CI was green on an old base",
+  "7433": "its new test (warp_text_dialog_tests.rs:252) builds state::TextEdit without the `document` field that #6509 added; dropped by the owner's choice, #6509 stays",
+  "4743": "disables the whole toolbar when no document is open; the tests #6907 (a_click_without_a_prior_hover_picks_the_tool) and #7595 (color_chips_stay_centred_when_the_tools_scroll) added later run in an empty session, so the disabled toolbar ignores the click and paints the chips faded; dropped by the owner's choice, #6907 and #7595 stay"
+}
