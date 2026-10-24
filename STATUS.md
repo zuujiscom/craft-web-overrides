@@ -1,13 +1,13 @@
 # Status
 
-Last run 2026-10-24 00:10 UTC.
+Last run 2026-10-24 05:00 UTC.
 
 | App | Result |
 | --- | --- |
 | deckcraft | failed: no result (see the run log); serving storytold's release |
 | effectcraft | unchanged: 0.16.0-zaf28efb7 |
 | filmcraft | unchanged: 0.12.0-z16a3b89e |
-| photocraft | built photocraft-0.15.1-z24950c4f |
+| photocraft | unchanged: 0.15.1-z24950c4f |
 | vectorcraft | failed: no result (see the run log); serving storytold's release |
 | wordcraft | unchanged: 0.10.0-z2b7f0f21 |
 
