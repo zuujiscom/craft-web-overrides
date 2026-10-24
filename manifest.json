@@ -40,8 +40,8 @@
     "version": "0.12.0"
   },
   "photocraft": {
-    "dir": "0.14.0-z15fffd02",
-    "id": "15fffd02",
+    "dir": "0.15.1-z24950c4f",
+    "id": "24950c4f",
     "patches": [
       {
         "patch": "zuujiscom/photocraft:fix/web-crash-recovery",
@@ -52,12 +52,12 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.14.0-z15fffd02",
-    "sha256": "a7e762c704561553365b545488af5475769194c11e6e1e1cbd98ddba9a383c80",
-    "source": "b3950f5d92e72afa0a0add48b7ab04d6974bc8b0",
-    "upstream_tag": "v0.14.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.14.0-z15fffd02/photocraft-web-0.14.0.zip",
-    "version": "0.14.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.15.1-z24950c4f",
+    "sha256": "e0bb3f498bb73fe450537a8f4c6c06b61626dd303ab2500d3d308ff325e167dd",
+    "source": "0f6fd5d31f1c71fb859d030fda2c77692da270a8",
+    "upstream_tag": "v0.15.1",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.15.1-z24950c4f/photocraft-web-0.15.1.zip",
+    "version": "0.15.1"
   },
   "wordcraft": {
     "dir": "0.10.0-z2b7f0f21",
