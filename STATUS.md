@@ -1,19 +1,17 @@
 # Status
 
-Last run 2026-10-25 11:58 UTC.
+Last run 2026-10-25 16:56 UTC.
 
 | App | Result |
 | --- | --- |
 | deckcraft | failed: no result (see the run log); serving storytold's release |
-| effectcraft | unchanged: 0.16.0-zaf28efb7 |
-| filmcraft | unchanged: 0.12.0-z16a3b89e |
-| photocraft | unchanged: 0.15.1-z24950c4f |
+| effectcraft | failed: no result (see the run log); serving storytold's release |
+| filmcraft | built filmcraft-0.13.0-z686a67c7 |
+| photocraft | built photocraft-0.16.0-z3da9d663 |
 | vectorcraft | failed: no result (see the run log); serving storytold's release |
-| wordcraft | unchanged: 0.10.0-z2b7f0f21 |
+| wordcraft | failed: no result (see the run log); serving storytold's release |
 
 ## Served
 
-- **effectcraft** 0.16.0-zaf28efb7 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.16.0-zaf28efb7)): storytold/effectcraft#1705; zuujiscom/effectcraft:fix/median-packed-histogram; zuujiscom/effectcraft:fix/second-tab
-- **filmcraft** 0.12.0-z16a3b89e ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.12.0-z16a3b89e)): zuujiscom/filmcraft:fix/opfs-write-webkit
-- **photocraft** 0.15.1-z24950c4f ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.15.1-z24950c4f)): zuujiscom/photocraft:fix/web-crash-recovery; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **wordcraft** 0.10.0-z2b7f0f21 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.10.0-z2b7f0f21)): zuujiscom/wordcraft:fix/web-recovery-0.9; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **filmcraft** 0.13.0-z686a67c7 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.13.0-z686a67c7)): zuujiscom/filmcraft:fix/opfs-write-webkit
+- **photocraft** 0.16.0-z3da9d663 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.16.0-z3da9d663)): zuujiscom/photocraft:fix/web-crash-recovery; zuujiscom/craft-libs:web-recovery@fd0185e934
