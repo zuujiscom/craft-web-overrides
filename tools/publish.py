@@ -38,6 +38,18 @@ def notes(r):
     return "\n".join(lines)
 
 
+def app_dir(results_dir, app):
+    """Where the app's result-<app> artifact landed: download-artifact unpacks a lone matching artifact
+    straight into <results dir> instead of <results dir>/result-<app>/."""
+    own = os.path.join(results_dir, f"result-{app}")
+    if os.path.isdir(own):
+        return own
+    lone = os.path.join(results_dir, "result.json")
+    if os.path.exists(lone) and json.load(open(lone)).get("app") == app:
+        return results_dir
+    return own
+
+
 def main():
     results_dir = sys.argv[1]
     overrides = json.load(open(os.path.join(ROOT, "overrides.json")))["apps"]
@@ -45,7 +57,8 @@ def main():
     manifest = json.load(open(path)) if os.path.exists(path) else {}
     status = []
     for app in sorted(overrides):
-        files = glob.glob(os.path.join(results_dir, f"result-{app}", "result.json"))
+        src = app_dir(results_dir, app)
+        files = glob.glob(os.path.join(src, "result.json"))
         if not files:
             manifest.pop(app, None)
             status.append((app, "failed: no result (see the run log); serving storytold's release"))
@@ -65,7 +78,7 @@ def main():
         if not r["build"]:
             status.append((app, f"unchanged: {manifest[app]['dir']}"))
             continue
-        zips = glob.glob(os.path.join(results_dir, f"result-{app}", f"{app}-web-*.zip"))
+        zips = glob.glob(os.path.join(src, f"{app}-web-*.zip"))
         if len(zips) != 1:
             manifest.pop(app, None)
             status.append((app, f"failed: build gave {len(zips)} zips; serving storytold's release"))

@@ -6,14 +6,6 @@
     }
   },
   "apps": {
-    "deckcraft": {
-      "patches": [
-        {
-          "pr": 977,
-          "why": "0.8.0's web build panics at startup: std::process::id() has no pid on wasm32 (storytold/deckcraft#959)"
-        }
-      ]
-    },
     "effectcraft": {
       "patches": [
         {
@@ -48,10 +40,6 @@
     },
     "vectorcraft": {
       "patches": [
-        {
-          "branch": "zuujiscom/vectorcraft:web-api-backport",
-          "why": "window.vectorcraft (the page's control channel, upstream #2943, merged after 0.13.1) so the web build can be driven and tested"
-        },
         {
           "branch": "zuujiscom/vectorcraft:fix/web-recovery",
           "why": "A reloaded or crashed tab's recovery copies were only offered after three save intervals (and only at startup), so they never appeared; offered at once now, and leaving with unsaved changes asks first"

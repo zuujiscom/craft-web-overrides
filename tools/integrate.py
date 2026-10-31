@@ -20,7 +20,7 @@ A PR is merged only when
 
 The merged commits are the PR heads FredApps approved, byte for byte. This script never builds or runs the code.
 """
-import argparse, json, os, re, subprocess, sys, time
+import argparse, json, os, re, subprocess, sys, tempfile, time
 
 UPSTREAM = "storytold"
 MIRROR = "zuujiscom"
@@ -50,7 +50,42 @@ SKIP_TEXT = [
 FLAG_TEXT = [r"\bunsafe\b", r"Command::new", r"TcpStream", r"UdpSocket", r"reqwest|ureq|hyper::", r"include_bytes!", r"std::env::var", r"libloading|dlopen"]
 
 
+# What the command line may name: an app repo, a branch, and files under these folders only.
+APP_NAME = re.compile(r"[a-z][a-z0-9-]*craft")
+BRANCH_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*(/[A-Za-z0-9][A-Za-z0-9._-]*)*")
+HERE = os.path.dirname(os.path.realpath(__file__))
+PATH_ROOTS = list(dict.fromkeys(os.path.realpath(p) for p in (os.path.expanduser("~"), tempfile.gettempdir(), "/private/tmp", "/tmp", "/Volumes")))
+TOOLS = ("git", "gh")
+
+
+def inside(path, roots, what):
+    """`path` resolved, if it lies under one of `roots`; exits otherwise."""
+    real = os.path.realpath(path)
+    for root in roots:
+        if os.path.commonpath([real, root]) == root:
+            return real
+    sys.exit(f"{what} must be under {' or '.join(roots)}: {path}")
+
+
+def checked(a):
+    """The command line's values, after checking each against what it may name."""
+    if not APP_NAME.fullmatch(a.app):
+        sys.exit(f"not an app name: {a.app}")
+    if not BRANCH_NAME.fullmatch(a.branch) or ".." in a.branch or a.branch.endswith(".lock"):
+        sys.exit(f"not a branch name: {a.branch}")
+    if a.branch in ("main", "master", "release"):
+        sys.exit("refusing to write to " + a.branch)
+    a.work = inside(a.work, PATH_ROOTS, "--work")
+    if a.report:
+        a.report = inside(a.report, PATH_ROOTS, "--report")
+    testing = os.path.realpath(os.path.join(HERE, "..", "testing"))
+    a.deny = inside(a.deny or os.path.join(testing, f"{a.app}-deny.json"), [testing], "--deny")
+    return a
+
+
 def run(args, cwd=None, check=True, inp=None):
+    if args[0] not in TOOLS:
+        sys.exit(f"not a tool this script runs: {args[0]}")
     r = subprocess.run(args, cwd=cwd, capture_output=True, text=True, input=inp)
     if check and r.returncode:
         sys.exit(f"{' '.join(args)}\n{r.stderr.strip()[:600]}")
@@ -221,11 +256,8 @@ def main():
     ap.add_argument("--report")
     ap.add_argument("--push", action="store_true")
     ap.add_argument("--deny", help="JSON {pr number: reason} of PRs to leave out (default testing/<app>-deny.json)")
-    a = ap.parse_args()
-    deny_path = a.deny or os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "testing", f"{a.app}-deny.json")
-    deny = json.load(open(deny_path)) if os.path.exists(deny_path) else {}
-    if a.branch in ("main", "master", "release"):
-        sys.exit("refusing to write to " + a.branch)
+    a = checked(ap.parse_args())
+    deny = json.load(open(a.deny)) if os.path.exists(a.deny) else {}
 
     cands, dropped = candidates(a.app)
     print(f"{len(cands)} PRs approved on their head with green CI; not eligible: {dropped}", file=sys.stderr)
