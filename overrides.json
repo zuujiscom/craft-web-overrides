@@ -9,24 +9,16 @@
     "effectcraft": {
       "patches": [
         {
-          "pr": 1705,
-          "why": "One shader module for every kernel: a single kernel a browser rejects takes the whole GPU compositor down (Safari), and Chrome's GPU watchdog loses the device (storytold/effectcraft#1590)"
-        },
-        {
-          "branch": "zuujiscom/effectcraft:fix/median-packed-histogram",
-          "why": "Safari's WebGPU refuses fxn_median_huang: its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables"
-        },
-        {
-          "branch": "zuujiscom/effectcraft:fix/second-tab",
-          "why": "A second tab restored the first tab's live project and overwrote its session snapshot (one slot per site); only the first tab keeps the session now, and the second says so"
+          "branch": "zuujiscom/effectcraft:fix/web-0.19",
+          "why": "Safari's WebGPU refuses fxn_median_huang (its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables), and since every kernel shares one module the whole GPU compositor goes; the histogram now packs 16-bit counts. Also: a second tab restored the first tab's live project and overwrote its session snapshot (one slot per site); only the first tab keeps the session now, and the second says so"
         }
       ]
     },
     "photocraft": {
       "patches": [
         {
-          "branch": "zuujiscom/photocraft:fix/web-crash-recovery",
-          "why": "The web build never autosaved: no recovery storage, and its autosave timer never fired (now_ms() is 0 on wasm), so a reload or crashed tab lost unsaved documents (storytold/photocraft#6615). Uses craft-web-recovery from the craft-libs override."
+          "branch": "zuujiscom/photocraft:fix/web-crash-recovery-0.18",
+          "why": "The web build never autosaved: no recovery storage, and an idle page draws no frames so the autosave tick never ran; a reload or crashed tab lost unsaved documents (storytold/photocraft#6615). Uses craft-web-recovery from the craft-libs override."
         }
       ]
     },
@@ -41,15 +33,15 @@
     "vectorcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/vectorcraft:fix/web-recovery",
-          "why": "A reloaded or crashed tab's recovery copies were only offered after three save intervals (and only at startup), so they never appeared; offered at once now, and leaving with unsaved changes asks first"
+          "branch": "zuujiscom/vectorcraft:fix/web-recovery-0.19",
+          "why": "A crashed tab's recovery copies were only offered after three save intervals (its heartbeat still counted though its Web Lock was gone), copies lived in local storage (about 5 MB shared by every app on the site), and leaving with unsaved changes didn't ask; now offered at once, kept in IndexedDB, and leaving asks first"
         }
       ]
     },
     "wordcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/wordcraft:fix/web-recovery-0.9",
+          "branch": "zuujiscom/wordcraft:fix/web-recovery-0.13",
           "why": "The web build had no crash recovery: edits were lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and reopened after a reload or crash"
         }
       ]
