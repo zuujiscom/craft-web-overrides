@@ -32,9 +32,13 @@
     "version": "0.15.0"
   },
   "photocraft": {
-    "dir": "0.18.0-za40b167d",
-    "id": "a40b167d",
+    "dir": "0.18.0-zefaafcfc",
+    "id": "efaafcfc",
     "patches": [
+      {
+        "patch": "storytold/photocraft#10248",
+        "why": "Since 0.17.0 the web zip ships wasm-bindgen's snippets only at the top, but app/photocraft-web.js imports ./snippets/\u2026 next to itself: inline0.js 404s and the app hangs on \"Loading PhotoCraft\u2026\" (storytold/photocraft#10491, #10017)"
+      },
       {
         "patch": "zuujiscom/photocraft:fix/web-crash-recovery-0.18",
         "why": "The web build never autosaved: no recovery storage, and an idle page draws no frames so the autosave tick never ran; a reload or crashed tab lost unsaved documents (storytold/photocraft#6615). Uses craft-web-recovery from the craft-libs override."
@@ -44,11 +48,11 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.18.0-za40b167d",
-    "sha256": "84ae8dfa7fa8a7de2d76e0f7bfe71d69615fb8b05c405ed8c5452b500bcde382",
-    "source": "832c105a07aa707f6d15faa5197d17ef59d7e5be",
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.18.0-zefaafcfc",
+    "sha256": "836eb380ce2473d6b997e5aec88e3119c0b1c63bb4213b40e57a501c88a0c87d",
+    "source": "71103343a8831175709a6e566c4278e4923a7d32",
     "upstream_tag": "v0.18.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.18.0-za40b167d/photocraft-web-0.18.0.zip",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.18.0-zefaafcfc/photocraft-web-0.18.0.zip",
     "version": "0.18.0"
   },
   "vectorcraft": {
