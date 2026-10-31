@@ -17,6 +17,10 @@
     "photocraft": {
       "patches": [
         {
+          "pr": 10248,
+          "why": "Since 0.17.0 the web zip ships wasm-bindgen's snippets only at the top, but app/photocraft-web.js imports ./snippets/… next to itself: inline0.js 404s and the app hangs on \"Loading PhotoCraft…\" (storytold/photocraft#10491, #10017)"
+        },
+        {
           "branch": "zuujiscom/photocraft:fix/web-crash-recovery-0.18",
           "why": "The web build never autosaved: no recovery storage, and an idle page draws no frames so the autosave tick never ran; a reload or crashed tab lost unsaved documents (storytold/photocraft#6615). Uses craft-web-recovery from the craft-libs override."
         }
