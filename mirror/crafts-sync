@@ -108,33 +108,34 @@ for app in $APPS; do
 done
 
 # landing page
-# name, kind, tile letters and a short description for each app's card
+# name, kind, tile letters and description for each app's card, taken from the app's README
+# (the tagline under its logo and its feature list); don't add anything the README doesn't say
 app_info() {
   case $1 in
     photocraft) N=PhotoCraft K="Image editor" T=Ph
-      D="Layered photo and image editing: selections, masks, adjustment layers, filters, brushes and text. Retouch a picture and export it as PNG, JPEG and more." ;;
+      D="Layers, masks, adjustment layers, layer styles, type, vectors and brushes, and it opens and saves real PSD files." ;;
     filmcraft) N=FilmCraft K="Video editor" T=Fm
-      D="Edit video on a multi-track timeline: trim and arrange clips, add transitions, titles and audio, then render the finished cut." ;;
+      D="A non-linear video editor: edit, colour-grade, add effects, motion, titles and captions, mix the audio and export." ;;
     lightcraft) N=LightCraft K="Photo library &amp; raw developer" T=Lt
-      D="Import a batch of photos, then adjust exposure, colour and tone, crop and apply presets without ever changing the originals." ;;
+      D="Organise your photos and develop raw files: light, colour, tone curve, colour grading, masking, presets, crop and black &amp; white. Every adjustment is non-destructive." ;;
     vectorcraft) N=VectorCraft K="Vector illustration" T=Vc
-      D="Draw with paths, shapes and the pen tool, combine them with pathfinder, add gradients and type. Opens and exports SVG for logos, icons and print." ;;
-    pdfcraft) N=PdfCraft K="PDF editor" T=Pd
-      D="Read and search PDF files, add notes, combine several into one, split or reorder pages, and pull out the text." ;;
-    effectcraft) N=EffectCraft K="Motion graphics" T=Fx
-      D="Compose text, shapes and footage in layers, animate them with keyframes and stack GPU effects for titles, intros and visual effects." ;;
+      D="The Pen, Direct Selection, Pathfinder, Smart Guides, Appearance, Swatches and Layers. Imports and exports SVG and PDF; exports PNG, JPEG and WebP." ;;
+    pdfcraft) N=PdfCraft K="PDF reader &amp; editor" T=Pd
+      D="Read, organise, combine, split and secure PDFs, with comments, forms, layers and attachments." ;;
+    effectcraft) N=EffectCraft K="Motion graphics &amp; VFX" T=Fx
+      D="A compositor with compositions, layers, keyframes, 308 effects, layer styles, expressions, 3D cameras and lights, and a render queue." ;;
     designcraft) N=DesignCraft K="Page layout" T=Dn
-      D="Lay out flyers, magazines and books: text frames that flow across pages, paragraph and character styles, and placed images." ;;
+      D="Spreads and parent pages, threaded text frames, paragraph and character styles, tables and text wrap. Exports PDF, EPUB, PNG and IDML." ;;
     wordcraft) N=WordCraft K="Word processor" T=Wd
-      D="Write letters, reports and long documents with styles, tables and page layout. Opens and saves Word .docx files." ;;
+      D="The ribbon, styles, tables, track changes, references and mail merge. Reads and writes .docx." ;;
     gridcraft) N=GridCraft K="Spreadsheet" T=Gd
-      D="Work through your numbers with formulas and a large function library, tables, sorting and filtering, and charts." ;;
+      D="500+ worksheet functions with dynamic arrays, tables, charts, conditional formatting, sort and AutoFilter. XLSX is its native format; CSV too." ;;
     deckcraft) N=DeckCraft K="Presentations" T=Dk
-      D="Build slides from layouts with text, shapes, pictures, tables and charts, then present them or save as PowerPoint .pptx." ;;
-    cadcraft) N=CADCraft K="2D/3D CAD" T=Cd
-      D="Precise drafting with coordinates, layers and dimensions, driven by a classic CAD command line (line, circle, offset, zoom)." ;;
+      D="Themes, layouts, shapes, pictures, tables, charts, transitions and animations. Opens and saves .pptx and presents full screen." ;;
+    cadcraft) N=CADCraft K="2D &amp; 3D CAD" T=Cd
+      D="The command line, object snaps, layers, dimensions, hatches, blocks and DXF drawings." ;;
     soundcraft) N=SoundCraft K="Audio workstation" T=Sd
-      D="Record or import audio on multiple tracks, edit clips, mix with faders and automation, and bounce the final mix." ;;
+      D="Multitrack editing, a full mixer with plugins, sends and automation, MIDI, recording and bouncing." ;;
     *) N=$1 K="" T=${1:0:2} D="" ;;
   esac
 }
@@ -147,8 +148,12 @@ app_info() {
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{padding:clamp(24px,4vw,56px) clamp(16px,4vw,56px)}
-h1{margin:0 0 8px;font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.02em}
-p.s{color:var(--mut);margin:0 0 28px;font-size:clamp(16px,1.6vw,19px);max-width:64ch}
+header{position:relative;margin:0 0 32px;padding:clamp(28px,5vw,64px) clamp(20px,4vw,48px);border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:radial-gradient(120% 140% at 0% 0%,#2a1f45 0%,transparent 55%),radial-gradient(120% 140% at 100% 100%,#123238 0%,transparent 55%),var(--card)}
+p.e{margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a99be0}
+h1{margin:0 0 16px;font-size:clamp(32px,5.2vw,60px);line-height:1.05;letter-spacing:-.03em;font-weight:750;background:linear-gradient(90deg,#fff 30%,#c9c2ef);-webkit-background-clip:text;background-clip:text;color:transparent}
+p.s{color:#b4b4be;margin:0 0 22px;font-size:clamp(16px,1.7vw,20px);max-width:60ch}
+p.c{display:flex;flex-wrap:wrap;gap:8px;margin:0}p.c span{padding:5px 12px;border-radius:999px;font-size:13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+
 .n{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:0 0 36px}
 .n div{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--mut)}
 .n b{display:block;color:var(--fg);font-size:15px;margin-bottom:2px}
@@ -173,11 +178,12 @@ footer{margin-top:40px;color:var(--mut);font-size:13px;max-width:90ch}footer a{c
 .a-photocraft{--a:#2f6fd6}.a-filmcraft{--a:#7a3fd1}.a-lightcraft{--a:#2b8a8a}.a-vectorcraft{--a:#d4572a}
 .a-pdfcraft{--a:#c23b3b}.a-effectcraft{--a:#8e44ad}.a-designcraft{--a:#c2387e}.a-wordcraft{--a:#2c5fa8}
 .a-gridcraft{--a:#2e8b4f}.a-deckcraft{--a:#c7651f}.a-cadcraft{--a:#4a5d73}.a-soundcraft{--a:#1f8fa6}</style></head><body><main>
-<h1>Craft apps in the browser</h1>
-<p class="s">Open-source creative apps from ArtCraft for images, video, illustration, layout, documents, spreadsheets, slides, CAD and audio, running entirely in your browser. Nothing to install and no account.</p>
-<div class="n"><div><b>Your files stay on your computer.</b> This site only delivers the apps. Opening a file reads it locally and Save or Export downloads it to your device; this server never receives your documents.</div>
-<div><b>Autosave depends on the app.</b> Apps marked "Autosave" keep a copy of open documents in this browser and offer it back after a reload or crash. For the others, save before you close the tab.</div>
-<div><b>Some features download extras.</b> A few apps fetch optional fonts or AI models from the internet when you use those features.</div></div>
+<header><p class="e">craft.zuujis.com</p>
+<h1>The ArtCraft apps,<br>right in your browser</h1>
+<p class="s">Open-source apps for photos, video, illustration, layout, documents, spreadsheets, slides, CAD and audio, built in Rust and running here as WebAssembly. Nothing to install.</p>
+<p class="c"><span>Open source</span><span>No sign-up</span><span>Updated with each release</span></p></header>
+<div class="n"><div><b>Your files stay on your computer.</b> This site only serves the apps; it has nowhere to receive your documents. Opening a file reads it in your browser, and saving downloads it to your device.</div>
+<div><b>Save often.</b> Apps marked &ldquo;Autosave&rdquo; keep a copy of unsaved work in this browser and offer it back after a reload or crash. Autosave in the other apps hasn't been tested here yet.</div></div>
 <ul>
 HTML
   for app in $APPS; do
@@ -191,7 +197,9 @@ HTML
     else
       extra=""
     fi
-    # crash recovery: EffectCraft and FilmCraft have their own; our patches add it to these three
+    # crash recovery we've checked: EffectCraft and FilmCraft have their own (our patches fix it on
+    # Safari); PhotoCraft, VectorCraft and WordCraft only get it from our patches. The other apps
+    # aren't labelled until their web autosave has been tested.
     case $app in
       effectcraft|filmcraft) rec=1 ;;
       photocraft|vectorcraft|wordcraft) [ -n "$extra" ] && rec=1 || rec=0 ;;
@@ -200,7 +208,7 @@ HTML
     if [ $rec = 1 ]; then
       rec='<p class="r ok">&#10003; Autosave: recovers unsaved work</p>'
     else
-      rec='<p class="r">No autosave: save before closing</p>'
+      rec='<p class="r"></p>'
     fi
     if [ -f "$ROOT/www/icons/$app.png" ]; then
       T=$(printf '<img class="i" src="/icons/%s.png?v=%s" alt="" width="52" height="52">' "$app" "$(date -r "$ROOT/www/icons/$app.png" +%s)")
