@@ -93,43 +93,127 @@ if command -v brotli >/dev/null 2>&1; then
     done
 fi
 
+# app icons for the landing page, from each app's repo (refreshed daily; a failed fetch keeps the old one)
+mkdir -p "$ROOT/www/icons"
+for app in $APPS; do
+  icon="$ROOT/www/icons/$app.png"
+  [ -n "$(find "$icon" -mtime -1 2>/dev/null)" ] && continue
+  if curl -fsS --max-time 30 -o "$ROOT/tmp/$app.png" \
+      "https://raw.githubusercontent.com/$OWNER/$app/main/assets/app-icon/hicolor/128x128/apps/ai.storyteller.$app.png" &&
+     [ "$(head -c 8 "$ROOT/tmp/$app.png" | od -An -tx1 | tr -d ' \n')" = 89504e470d0a1a0a ]; then
+    mv -f "$ROOT/tmp/$app.png" "$icon"
+  else
+    rm -f "$ROOT/tmp/$app.png"; log "$app: could not fetch its icon"
+  fi
+done
+
 # landing page
+# name, kind, tile letters and a short description for each app's card
+app_info() {
+  case $1 in
+    photocraft) N=PhotoCraft K="Image editor" T=Ph
+      D="Layered photo and image editing: selections, masks, adjustment layers, filters, brushes and text. Retouch a picture and export it as PNG, JPEG and more." ;;
+    filmcraft) N=FilmCraft K="Video editor" T=Fm
+      D="Edit video on a multi-track timeline: trim and arrange clips, add transitions, titles and audio, then render the finished cut." ;;
+    lightcraft) N=LightCraft K="Photo library &amp; raw developer" T=Lt
+      D="Import a batch of photos, then adjust exposure, colour and tone, crop and apply presets without ever changing the originals." ;;
+    vectorcraft) N=VectorCraft K="Vector illustration" T=Vc
+      D="Draw with paths, shapes and the pen tool, combine them with pathfinder, add gradients and type. Opens and exports SVG for logos, icons and print." ;;
+    pdfcraft) N=PdfCraft K="PDF editor" T=Pd
+      D="Read and search PDF files, add notes, combine several into one, split or reorder pages, and pull out the text." ;;
+    effectcraft) N=EffectCraft K="Motion graphics" T=Fx
+      D="Compose text, shapes and footage in layers, animate them with keyframes and stack GPU effects for titles, intros and visual effects." ;;
+    designcraft) N=DesignCraft K="Page layout" T=Dn
+      D="Lay out flyers, magazines and books: text frames that flow across pages, paragraph and character styles, and placed images." ;;
+    wordcraft) N=WordCraft K="Word processor" T=Wd
+      D="Write letters, reports and long documents with styles, tables and page layout. Opens and saves Word .docx files." ;;
+    gridcraft) N=GridCraft K="Spreadsheet" T=Gd
+      D="Work through your numbers with formulas and a large function library, tables, sorting and filtering, and charts." ;;
+    deckcraft) N=DeckCraft K="Presentations" T=Dk
+      D="Build slides from layouts with text, shapes, pictures, tables and charts, then present them or save as PowerPoint .pptx." ;;
+    cadcraft) N=CADCraft K="2D/3D CAD" T=Cd
+      D="Precise drafting with coordinates, layers and dimensions, driven by a classic CAD command line (line, circle, offset, zoom)." ;;
+    soundcraft) N=SoundCraft K="Audio workstation" T=Sd
+      D="Record or import audio on multiple tracks, edit clips, mix with faders and automation, and bounce the final mix." ;;
+    *) N=$1 K="" T=${1:0:2} D="" ;;
+  esac
+}
 {
   cat <<'HTML'
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Craft apps in the browser</title>
-<style>:root{color-scheme:light dark;--bg:#fff;--fg:#1c1c1e;--mut:#6b6b70;--card:#f4f4f6;--bd:#dcdce0;--pt:#fde9c8;--pf:#7a4a00}
-@media(prefers-color-scheme:dark){:root{--bg:#161618;--fg:#ececf0;--mut:#9a9aa2;--card:#222226;--bd:#38383e;--pt:#4a3412;--pf:#f5c97a}}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
-main{max-width:860px;margin:0 auto;padding:40px 16px}h1{margin:0 0 4px}p.s{color:var(--mut);margin:0 0 28px}
-ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-a.c{display:block;padding:14px 16px;background:var(--card);border:1px solid var(--bd);border-radius:10px;color:inherit;text-decoration:none}
-a.c:hover{border-color:var(--fg)}b{display:block;font-size:17px}span{color:var(--mut);font-size:13px}
-em{font-style:normal;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;vertical-align:2px;margin-left:6px;padding:2px 6px;border-radius:5px;background:var(--pt);color:var(--pf)}
-a.w{display:inline-block;margin:6px 0 0 4px;font-size:13px;color:var(--mut)}
-footer{margin-top:32px;color:var(--mut);font-size:13px}
-.n{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:0 0 24px;font-size:15px}.n b{display:inline}</style></head><body><main>
+<meta name="color-scheme" content="dark"><title>Craft apps in the browser</title>
+<meta name="description" content="Open-source creative apps from ArtCraft, running entirely in your browser: image, video, vector, layout, documents, spreadsheets, slides, CAD and audio.">
+<style>:root{color-scheme:dark;--bg:#0f0f11;--fg:#dcdce2;--mut:#8b8b94;--card:#18181b;--bd:#26262b;--hv:#44444c;--pt:#3a2a10;--pf:#e8c27e;--ok:#7fc79a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{padding:clamp(24px,4vw,56px) clamp(16px,4vw,56px)}
+h1{margin:0 0 8px;font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.02em}
+p.s{color:var(--mut);margin:0 0 28px;font-size:clamp(16px,1.6vw,19px);max-width:64ch}
+.n{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:0 0 36px}
+.n div{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--mut)}
+.n b{display:block;color:var(--fg);font-size:15px;margin-bottom:2px}
+ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));grid-auto-rows:1fr;gap:16px}
+li{position:relative;display:flex;flex-direction:column;padding:20px;background:var(--card);border:1px solid var(--bd);border-radius:14px;transition:border-color .15s,transform .15s}
+li:hover{border-color:var(--hv);transform:translateY(-2px)}
+li:focus-within{outline:2px solid var(--a);outline-offset:2px}
+.h{display:flex;align-items:center;gap:14px}
+.i{flex:none;width:52px;height:52px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--a) 24%,var(--card));color:color-mix(in srgb,var(--a) 45%,#fff);font-weight:700;font-size:18px;letter-spacing:-.02em}
+img.i{background:none;object-fit:contain}
+h2{margin:0;font-size:19px;line-height:1.2}
+h2 a{color:inherit;text-decoration:none}h2 a:focus{outline:none}
+h2 a::after{content:"";position:absolute;inset:0;border-radius:14px}
+.k{color:var(--mut);font-size:13px}
+p.d{flex:1;margin:14px 0 12px;font-size:15px;color:#c4c4cc}
+p.r{margin:0 0 14px;font-size:13px;color:var(--mut)}p.r.ok{color:var(--ok)}
+.f{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--bd);font-size:13px;color:var(--mut)}
+.f .go{margin-left:auto;font-weight:600;color:color-mix(in srgb,var(--a) 55%,#fff)}
+em{font-style:normal;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:5px;background:var(--pt);color:var(--pf)}
+a.w{position:relative;z-index:1;color:var(--mut)}a.w:hover{color:var(--fg)}
+footer{margin-top:40px;color:var(--mut);font-size:13px;max-width:90ch}footer a{color:inherit}
+.a-photocraft{--a:#2f6fd6}.a-filmcraft{--a:#7a3fd1}.a-lightcraft{--a:#2b8a8a}.a-vectorcraft{--a:#d4572a}
+.a-pdfcraft{--a:#c23b3b}.a-effectcraft{--a:#8e44ad}.a-designcraft{--a:#c2387e}.a-wordcraft{--a:#2c5fa8}
+.a-gridcraft{--a:#2e8b4f}.a-deckcraft{--a:#c7651f}.a-cadcraft{--a:#4a5d73}.a-soundcraft{--a:#1f8fa6}</style></head><body><main>
 <h1>Craft apps in the browser</h1>
-<p class="s">Open-source creative apps from ArtCraft, running entirely in your browser.</p>
-<div class="n"><b>Your files stay on your computer.</b> This site only delivers the apps. Opening a file reads it locally and Save or Export downloads it to your device; this server never receives your documents, and there is no account or cloud storage.
-<br><b>Save before you close the tab.</b> The web versions have no autosave or crash recovery, so unsaved work is lost on reload. Settings are kept in your browser's local storage.
-<br>Some apps may download optional extras, such as fonts or AI models, from the internet when you use those features.</div><ul>
+<p class="s">Open-source creative apps from ArtCraft for images, video, illustration, layout, documents, spreadsheets, slides, CAD and audio, running entirely in your browser. Nothing to install and no account.</p>
+<div class="n"><div><b>Your files stay on your computer.</b> This site only delivers the apps. Opening a file reads it locally and Save or Export downloads it to your device; this server never receives your documents.</div>
+<div><b>Autosave depends on the app.</b> Apps marked "Autosave" keep a copy of open documents in this browser and offer it back after a reload or crash. For the others, save before you close the tab.</div>
+<div><b>Some features download extras.</b> A few apps fetch optional fonts or AI models from the internet when you use those features.</div></div>
+<ul>
 HTML
   for app in $APPS; do
     [ -L "$ROOT/www/$app" ] || continue
     v=$(basename "$(readlink "$ROOT/www/$app")")
+    app_info "$app"
     read -r _ odir _ _ orel <<<"$(override "$app")"
     if [ -n "${odir:-}" ] && [ "$v" = "$odir" ]; then
-      printf '<li><a class="c" href="/%s/"><b>%s <em>patched</em></b><span>version %s with fixes not in a storytold release yet</span></a><a class="w" href="%s">What&#39;s patched</a></li>\n' "$app" "$app" "${v%-z*}" "$orel"
+      extra=$(printf '<em title="Carries fixes not in a storytold release yet">patched</em><a class="w" href="%s">What&#39;s patched</a>' "$orel")
+      v=${v%-z*}
     else
-      printf '<li><a class="c" href="/%s/"><b>%s</b><span>version %s</span></a></li>\n' "$app" "$app" "$v"
+      extra=""
     fi
+    # crash recovery: EffectCraft and FilmCraft have their own; our patches add it to these three
+    case $app in
+      effectcraft|filmcraft) rec=1 ;;
+      photocraft|vectorcraft|wordcraft) [ -n "$extra" ] && rec=1 || rec=0 ;;
+      *) rec=0 ;;
+    esac
+    if [ $rec = 1 ]; then
+      rec='<p class="r ok">&#10003; Autosave: recovers unsaved work</p>'
+    else
+      rec='<p class="r">No autosave: save before closing</p>'
+    fi
+    if [ -f "$ROOT/www/icons/$app.png" ]; then
+      T=$(printf '<img class="i" src="/icons/%s.png?v=%s" alt="" width="52" height="52">' "$app" "$(date -r "$ROOT/www/icons/$app.png" +%s)")
+    else
+      T="<span class=\"i\" aria-hidden=\"true\">$T</span>"
+    fi
+    printf '<li class="a-%s"><div class="h">%s<div><h2><a href="/%s/">%s</a></h2><span class="k">%s</span></div></div><p class="d">%s</p>%s<div class="f"><span>v%s</span>%s<span class="go" aria-hidden="true">Open &rarr;</span></div></li>\n' \
+      "$app" "$T" "$app" "$N" "$K" "$D" "$rec" "$v" "$extra"
   done
   cat <<'HTML'
 </ul><footer>Unofficial web hosting of the open-source builds from <a href="https://github.com/storytold">github.com/storytold</a>
-(MIT or Apache-2.0). Updated automatically when a new release is published. Apps marked "patched" carry patches
-that aren't in a storytold release yet: <a href="https://github.com/zuujiscom/craft-web-overrides">craft-web-overrides</a>.
-These apps keep no autosave in the browser.</footer>
+(MIT or Apache-2.0), updated automatically when a new release is published. Apps marked "patched" carry fixes
+that aren't in a storytold release yet: <a href="https://github.com/zuujiscom/craft-web-overrides">craft-web-overrides</a>.</footer>
 </main></body></html>
 HTML
 } > "$ROOT/www/.index.new" && mv -f "$ROOT/www/.index.new" "$ROOT/www/index.html"
