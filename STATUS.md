@@ -1,12 +1,12 @@
 # Status
 
-Last run 2026-10-31 22:57 UTC.
+Last run 2026-11-01 00:25 UTC.
 
 | App | Result |
 | --- | --- |
 | effectcraft | unchanged: 0.19.0-z99eab43d |
 | filmcraft | unchanged: 0.15.0-zca05d931 |
-| photocraft | built photocraft-0.18.0-zefaafcfc |
+| photocraft | unchanged: 0.18.0-zefaafcfc |
 | vectorcraft | unchanged: 0.19.0-z5850de9f |
 | wordcraft | unchanged: 0.13.2-zaffaaea0 |
 
