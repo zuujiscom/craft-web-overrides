@@ -49,6 +49,54 @@
           "why": "The web build had no crash recovery: edits were lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and reopened after a reload or crash"
         }
       ]
+    },
+    "deckcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/deckcraft:fix/web-recovery-0.14",
+          "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved presentations are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash"
+        }
+      ]
+    },
+    "designcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/designcraft:fix/web-recovery-0.16",
+          "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash"
+        }
+      ]
+    },
+    "cadcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/cadcraft:fix/web-recovery-0.16",
+          "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved drawings are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash in Drawing Recovery; also, a restored profile no longer makes the new empty drawing look unsaved"
+        }
+      ]
+    },
+    "gridcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/gridcraft:fix/web-recovery-0.15",
+          "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved workbooks are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash"
+        }
+      ]
+    },
+    "pdfcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/pdfcraft:fix/web-recovery-0.17",
+          "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash; the recovery dialog no longer panics (it used std::time on wasm)"
+        }
+      ]
+    },
+    "soundcraft": {
+      "patches": [
+        {
+          "branch": "zuujiscom/soundcraft:fix/web-recovery-0.16",
+          "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved sessions are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash"
+        }
+      ]
     }
   }
 }
