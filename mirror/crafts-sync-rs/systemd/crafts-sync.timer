@@ -1,0 +1,11 @@
+[Unit]
+Description=Check for new Craft app releases every 15 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15min
+RandomizedDelaySec=60
+Persistent=true
+
+[Install]
+WantedBy=timers.target
