@@ -1,18 +1,18 @@
 # Status
 
-Last run 2026-11-02 08:02 UTC.
+Last run 2026-11-02 19:46 UTC.
 
 | App | Result |
 | --- | --- |
-| cadcraft | built cadcraft-0.16.0-zc7f0e87b |
-| deckcraft | built deckcraft-0.14.1-z14c8c8df |
-| designcraft | built designcraft-0.16.0-zbab20abc |
+| cadcraft | unchanged: 0.16.0-zc7f0e87b |
+| deckcraft | unchanged: 0.14.1-z14c8c8df |
+| designcraft | unchanged: 0.16.0-zbab20abc |
 | effectcraft | unchanged: 0.20.0-z3ac954bd |
 | filmcraft | unchanged: 0.16.0-z69547173 |
-| gridcraft | built gridcraft-0.15.0-zd867effe |
-| pdfcraft | built pdfcraft-0.17.0-zc491b0fa |
+| gridcraft | unchanged: 0.15.0-zd867effe |
+| pdfcraft | unchanged: 0.17.0-zc491b0fa |
 | photocraft | unchanged: 0.19.0-z0976b0c8 |
-| soundcraft | built soundcraft-0.16.0-z59cd4a5e |
+| soundcraft | unchanged: 0.16.0-z59cd4a5e |
 | vectorcraft | unchanged: 0.20.0-zfd0d8044 |
 | wordcraft | unchanged: 0.14.0-z1e10ec37 |
 
