@@ -1,0 +1,48 @@
+[Unit]
+Description=Sync storytold Craft app web builds (craft.zuujis.com)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=crafts
+Group=crafts
+Environment=CRAFTS_ROOT=/srv/crafts
+ExecStart=/usr/local/bin/crafts-sync-rs
+Nice=10
+CPUWeight=20
+# Never at the expense of the sites on this box: brotli quality 11 takes ~130 MB.
+MemoryMax=300M
+IOSchedulingClass=idle
+# The first run unpacks every app and makes the brotli copies; later runs resume where it stopped.
+TimeoutStartSec=3h
+
+# Hardening. It writes only under /srv/crafts and talks only to GitHub over https.
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+ProtectSystem=strict
+ReadWritePaths=/srv/crafts
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectProc=invisible
+ProcSubset=pid
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+# Not the private networks or the cloud metadata address; loopback stays open for the local DNS stub.
+IPAddressDeny=10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 100.64.0.0/10 169.254.0.0/16 fc00::/7 fe80::/10
+UMask=0022
