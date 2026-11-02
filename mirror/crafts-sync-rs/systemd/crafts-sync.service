@@ -8,11 +8,14 @@ Type=oneshot
 User=crafts
 Group=crafts
 Environment=CRAFTS_ROOT=/srv/crafts
-ExecStart=/usr/local/bin/crafts-sync
+ExecStart=/usr/local/bin/crafts-sync-rs
 Nice=10
 CPUWeight=20
+# Never at the expense of the sites on this box: brotli quality 11 takes ~130 MB.
 MemoryMax=300M
-TimeoutStartSec=1800
+IOSchedulingClass=idle
+# The first run unpacks every app and makes the brotli copies; later runs resume where it stopped.
+TimeoutStartSec=3h
 
 # Hardening. It writes only under /srv/crafts and talks only to GitHub over https.
 NoNewPrivileges=yes
