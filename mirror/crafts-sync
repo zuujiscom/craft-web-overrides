@@ -183,7 +183,7 @@ footer{margin-top:40px;color:var(--mut);font-size:13px;max-width:90ch}footer a{c
 <p class="s">Open-source apps for photos, video, illustration, layout, documents, spreadsheets, slides, CAD and audio, built in Rust and running here as WebAssembly. Nothing to install.</p>
 <p class="c"><span>Open source</span><span>No sign-up</span><span>Updated with each release</span></p></header>
 <div class="n"><div><b>Your files stay on your computer.</b> This site only serves the apps; it has nowhere to receive your documents. Opening a file reads it in your browser, and saving downloads it to your device.</div>
-<div><b>Save often.</b> Apps marked &ldquo;Autosave&rdquo; keep a copy of unsaved work in this browser and offer it back after a reload or crash. Autosave in the other apps hasn't been tested here yet.</div></div>
+<div><b>Save often.</b> Apps marked &ldquo;Autosave&rdquo; keep a copy of unsaved work in this browser and offer it back after a reload or crash. It's a safety net, not a save: download your work to keep it.</div></div>
 <ul>
 HTML
   for app in $APPS; do
@@ -198,11 +198,12 @@ HTML
       extra=""
     fi
     # crash recovery we've checked: EffectCraft and FilmCraft have their own (our patches fix it on
-    # Safari); PhotoCraft, VectorCraft and WordCraft only get it from our patches. The other apps
-    # aren't labelled until their web autosave has been tested.
+    # Safari); the others only get it from our patches (craft-web-recovery). LightCraft isn't
+    # labelled until its web autosave has been tested.
     case $app in
       effectcraft|filmcraft) rec=1 ;;
-      photocraft|vectorcraft|wordcraft) [ -n "$extra" ] && rec=1 || rec=0 ;;
+      photocraft|vectorcraft|wordcraft|deckcraft|designcraft|cadcraft|gridcraft|pdfcraft|soundcraft)
+        [ -n "$extra" ] && rec=1 || rec=0 ;;
       *) rec=0 ;;
     esac
     if [ $rec = 1 ]; then
