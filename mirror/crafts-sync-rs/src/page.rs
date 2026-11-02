@@ -94,12 +94,13 @@ pub fn app_info(app: &str) -> Info {
     Info { name: n.to_owned(), kind: k, tile: t.to_owned(), desc: d }
 }
 
-/// Apps whose crash recovery has been checked (EffectCraft and FilmCraft have their own; PhotoCraft,
-/// VectorCraft and WordCraft only get it from our patches). The others aren't labelled until tested.
+/// Crash recovery we've checked: EffectCraft and FilmCraft have their own (our patches fix it on Safari); the
+/// others only get it from our patches (craft-web-recovery). LightCraft isn't labelled until tested.
 fn recovers(app: &str, patched: bool) -> bool {
     match app {
         "effectcraft" | "filmcraft" => true,
-        "photocraft" | "vectorcraft" | "wordcraft" => patched,
+        "photocraft" | "vectorcraft" | "wordcraft" | "deckcraft" | "designcraft" | "cadcraft" | "gridcraft"
+        | "pdfcraft" | "soundcraft" => patched,
         _ => false,
     }
 }
