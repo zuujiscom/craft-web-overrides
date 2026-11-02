@@ -151,7 +151,7 @@ main{padding:clamp(24px,4vw,56px) clamp(16px,4vw,56px)}
 header{position:relative;margin:0 0 32px;padding:clamp(28px,5vw,64px) clamp(20px,4vw,48px);border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:radial-gradient(120% 140% at 0% 0%,#2a1f45 0%,transparent 55%),radial-gradient(120% 140% at 100% 100%,#123238 0%,transparent 55%),var(--card)}
 p.e{margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a99be0}
 h1{margin:0 0 16px;font-size:clamp(32px,5.2vw,60px);line-height:1.05;letter-spacing:-.03em;font-weight:750;background:linear-gradient(90deg,#fff 30%,#c9c2ef);-webkit-background-clip:text;background-clip:text;color:transparent}
-p.s{color:#b4b4be;margin:0 0 22px;font-size:clamp(16px,1.7vw,20px);max-width:60ch}
+p.s{color:#b4b4be;margin:0 0 22px;font-size:clamp(16px,1.7vw,20px)}
 p.c{display:flex;flex-wrap:wrap;gap:8px;margin:0}p.c span{padding:5px 12px;border-radius:999px;font-size:13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
 
 .n{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:0 0 36px}
@@ -174,7 +174,7 @@ p.r{margin:0 0 14px;font-size:13px;color:var(--mut)}p.r.ok{color:var(--ok)}
 .f .go{margin-left:auto;font-weight:600;color:color-mix(in srgb,var(--a) 55%,#fff)}
 em{font-style:normal;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:5px;background:var(--pt);color:var(--pf)}
 a.w{position:relative;z-index:1;color:var(--mut)}a.w:hover{color:var(--fg)}
-footer{margin-top:40px;color:var(--mut);font-size:13px;max-width:90ch}footer a{color:inherit}
+footer{margin-top:40px;color:var(--mut);font-size:13px}footer a{color:inherit}
 .a-photocraft{--a:#2f6fd6}.a-filmcraft{--a:#7a3fd1}.a-lightcraft{--a:#2b8a8a}.a-vectorcraft{--a:#d4572a}
 .a-pdfcraft{--a:#c23b3b}.a-effectcraft{--a:#8e44ad}.a-designcraft{--a:#c2387e}.a-wordcraft{--a:#2c5fa8}
 .a-gridcraft{--a:#2e8b4f}.a-deckcraft{--a:#c7651f}.a-cadcraft{--a:#4a5d73}.a-soundcraft{--a:#1f8fa6}</style></head><body><main>
