@@ -1,7 +1,7 @@
 # crafts-sync (Rust)
 
 Rust replacement for `mirror/crafts-sync` (bash + python3 + curl + unzip + gzip + brotli). Same behaviour, one
-static-ish binary, no other tools on the box. Run every 15 minutes by `systemd/crafts-sync.timer` as user `crafts`.
+static-ish binary, no other tools needed. Run every 15 minutes by `systemd/crafts-sync.timer` as user `crafts`.
 
 Environment (same as the bash script): `CRAFTS_ROOT` (default `/srv/crafts`), `CRAFTS_APPS` (space separated),
 `CRAFTS_MANIFEST_URL`.

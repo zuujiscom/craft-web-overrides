@@ -11,7 +11,7 @@ Environment=CRAFTS_ROOT=/srv/crafts
 ExecStart=/usr/local/bin/crafts-sync-rs
 Nice=10
 CPUWeight=20
-# Never at the expense of the sites on this box: brotli quality 11 takes ~130 MB.
+# Low priority so it never slows other services; brotli quality 11 takes ~130 MB.
 MemoryMax=300M
 IOSchedulingClass=idle
 # The first run unpacks every app and makes the brotli copies; later runs resume where it stopped.
