@@ -1,20 +1,20 @@
 # Status
 
-Last run 2026-11-03 03:19 UTC.
+Last run 2026-11-03 11:19 UTC.
 
 | App | Result |
 | --- | --- |
-| cadcraft | built cadcraft-0.17.0-zaf4c0da8 |
+| cadcraft | unchanged: 0.17.0-zaf4c0da8 |
 | deckcraft | failed: no result (see the run log); serving storytold's release |
-| designcraft | built designcraft-0.17.0-z064f745d |
-| effectcraft | built effectcraft-0.21.0-z56c12d06 |
-| filmcraft | built filmcraft-0.17.0-z180044e1 |
-| gridcraft | built gridcraft-0.16.0-z5a1a4979 |
-| pdfcraft | built pdfcraft-0.18.0-z732e199a |
-| photocraft | built photocraft-0.20.1-z028bae86 |
-| soundcraft | built soundcraft-0.17.0-z844ff917 |
-| vectorcraft | built vectorcraft-0.21.0-z48598f89 |
-| wordcraft | built wordcraft-0.15.0-zb7442c91 |
+| designcraft | unchanged: 0.17.0-z064f745d |
+| effectcraft | unchanged: 0.21.0-z56c12d06 |
+| filmcraft | unchanged: 0.17.0-z180044e1 |
+| gridcraft | unchanged: 0.16.0-z5a1a4979 |
+| pdfcraft | unchanged: 0.18.0-z732e199a |
+| photocraft | unchanged: 0.20.1-z028bae86 |
+| soundcraft | unchanged: 0.17.0-z844ff917 |
+| vectorcraft | unchanged: 0.21.0-z48598f89 |
+| wordcraft | unchanged: 0.15.0-zb7442c91 |
 
 ## Served
 
