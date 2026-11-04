@@ -92,8 +92,8 @@
     "version": "0.16.0"
   },
   "pdfcraft": {
-    "dir": "0.18.0-z732e199a",
-    "id": "732e199a",
+    "dir": "0.18.1-z6dac8a9c",
+    "id": "6dac8a9c",
     "patches": [
       {
         "patch": "zuujiscom/pdfcraft:fix/web-recovery-0.17",
@@ -104,12 +104,12 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/pdfcraft-0.18.0-z732e199a",
-    "sha256": "c4be3e74ffeaf74ee9a66e4d25997bf0f42587b052363a606bcf0b5c8ab47402",
-    "source": "cc58fb7fd273525a57b4e85902f47548aa1e84c9",
-    "upstream_tag": "v0.18.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/pdfcraft-0.18.0-z732e199a/pdfcraft-web-0.18.0.zip",
-    "version": "0.18.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/pdfcraft-0.18.1-z6dac8a9c",
+    "sha256": "23e6524fe42d9da31aaffdb079d4d7f59cd6e48f655cadabeec1125503d0efa4",
+    "source": "192a5a730e287ef57a3a06671725cbc83f74245a",
+    "upstream_tag": "v0.18.1",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/pdfcraft-0.18.1-z6dac8a9c/pdfcraft-web-0.18.1.zip",
+    "version": "0.18.1"
   },
   "photocraft": {
     "dir": "0.20.1-z028bae86",
@@ -176,8 +176,8 @@
     "version": "0.21.0"
   },
   "wordcraft": {
-    "dir": "0.15.0-zb7442c91",
-    "id": "b7442c91",
+    "dir": "0.15.1-ze3727e21",
+    "id": "e3727e21",
     "patches": [
       {
         "patch": "zuujiscom/wordcraft:fix/web-recovery-0.13",
@@ -188,11 +188,11 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.15.0-zb7442c91",
-    "sha256": "7aae9e01ee2186706f2814848e44e76a9e8edddf6bece6f336218e0a06b362d3",
-    "source": "2897394c5fdaa920c3c3ca2aaa4212d59dc2c6de",
-    "upstream_tag": "v0.15.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/wordcraft-0.15.0-zb7442c91/wordcraft-web-0.15.0.zip",
-    "version": "0.15.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.15.1-ze3727e21",
+    "sha256": "e4fdd3eb766d43dfbcb04691a6ec2be01b7ec9338b2647b1b0060c35e02e0472",
+    "source": "1d882cb5d9bb1b7b5e2a926c2aea9ee92926f708",
+    "upstream_tag": "v0.15.1",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/wordcraft-0.15.1-ze3727e21/wordcraft-web-0.15.1.zip",
+    "version": "0.15.1"
   }
 }

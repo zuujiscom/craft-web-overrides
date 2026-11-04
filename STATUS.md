@@ -1,6 +1,6 @@
 # Status
 
-Last run 2026-11-04 01:38 UTC.
+Last run 2026-11-04 11:42 UTC.
 
 | App | Result |
 | --- | --- |
@@ -10,11 +10,11 @@ Last run 2026-11-04 01:38 UTC.
 | effectcraft | unchanged: 0.21.0-z56c12d06 |
 | filmcraft | unchanged: 0.17.0-z180044e1 |
 | gridcraft | unchanged: 0.16.0-z5a1a4979 |
-| pdfcraft | unchanged: 0.18.0-z732e199a |
+| pdfcraft | built pdfcraft-0.18.1-z6dac8a9c |
 | photocraft | unchanged: 0.20.1-z028bae86 |
 | soundcraft | unchanged: 0.17.0-z844ff917 |
 | vectorcraft | unchanged: 0.21.0-z48598f89 |
-| wordcraft | unchanged: 0.15.0-zb7442c91 |
+| wordcraft | built wordcraft-0.15.1-ze3727e21 |
 
 ## Served
 
@@ -23,8 +23,8 @@ Last run 2026-11-04 01:38 UTC.
 - **effectcraft** 0.21.0-z56c12d06 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.21.0-z56c12d06)): zuujiscom/effectcraft:fix/web-0.19
 - **filmcraft** 0.17.0-z180044e1 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.17.0-z180044e1)): zuujiscom/filmcraft:fix/opfs-write-webkit
 - **gridcraft** 0.16.0-z5a1a4979 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/gridcraft-0.16.0-z5a1a4979)): zuujiscom/gridcraft:fix/web-recovery-0.15; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **pdfcraft** 0.18.0-z732e199a ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/pdfcraft-0.18.0-z732e199a)): zuujiscom/pdfcraft:fix/web-recovery-0.17; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **pdfcraft** 0.18.1-z6dac8a9c ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/pdfcraft-0.18.1-z6dac8a9c)): zuujiscom/pdfcraft:fix/web-recovery-0.17; zuujiscom/craft-libs:web-recovery@fd0185e934
 - **photocraft** 0.20.1-z028bae86 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.20.1-z028bae86)): storytold/photocraft#10248; zuujiscom/photocraft:fix/web-crash-recovery-0.18; zuujiscom/craft-libs:web-recovery@fd0185e934
 - **soundcraft** 0.17.0-z844ff917 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/soundcraft-0.17.0-z844ff917)): zuujiscom/soundcraft:fix/web-recovery-0.16; zuujiscom/craft-libs:web-recovery@fd0185e934
 - **vectorcraft** 0.21.0-z48598f89 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.21.0-z48598f89)): zuujiscom/vectorcraft:fix/web-recovery-0.19; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **wordcraft** 0.15.0-zb7442c91 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.15.0-zb7442c91)): zuujiscom/wordcraft:fix/web-recovery-0.13; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **wordcraft** 0.15.1-ze3727e21 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.15.1-ze3727e21)): zuujiscom/wordcraft:fix/web-recovery-0.13; zuujiscom/craft-libs:web-recovery@fd0185e934
