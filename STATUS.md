@@ -1,6 +1,6 @@
 # Status
 
-Last run 2026-11-04 11:42 UTC.
+Last run 2026-11-04 20:00 UTC.
 
 | App | Result |
 | --- | --- |
@@ -10,11 +10,11 @@ Last run 2026-11-04 11:42 UTC.
 | effectcraft | unchanged: 0.21.0-z56c12d06 |
 | filmcraft | unchanged: 0.17.0-z180044e1 |
 | gridcraft | unchanged: 0.16.0-z5a1a4979 |
-| pdfcraft | built pdfcraft-0.18.1-z6dac8a9c |
+| pdfcraft | unchanged: 0.18.1-z6dac8a9c |
 | photocraft | unchanged: 0.20.1-z028bae86 |
 | soundcraft | unchanged: 0.17.0-z844ff917 |
 | vectorcraft | unchanged: 0.21.0-z48598f89 |
-| wordcraft | built wordcraft-0.15.1-ze3727e21 |
+| wordcraft | unchanged: 0.15.1-ze3727e21 |
 
 ## Served
 
