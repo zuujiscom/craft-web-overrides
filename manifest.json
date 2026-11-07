@@ -1,27 +1,7 @@
 {
-  "cadcraft": {
-    "dir": "0.17.1-zc5222a17",
-    "id": "c5222a17",
-    "patches": [
-      {
-        "patch": "zuujiscom/cadcraft:fix/web-recovery-0.16",
-        "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved drawings are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash in Drawing Recovery; also, a restored profile no longer makes the new empty drawing look unsaved"
-      },
-      {
-        "patch": "zuujiscom/craft-libs:web-recovery@fd0185e934",
-        "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
-      }
-    ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/cadcraft-0.17.1-zc5222a17",
-    "sha256": "de6c90902facbda0bd69592d0166ee5ed4a979988d366f91285ff7b89d6e819b",
-    "source": "954a92e2216a3627324169fd7b6f4b666bd2a7ae",
-    "upstream_tag": "v0.17.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/cadcraft-0.17.1-zc5222a17/cadcraft-web-0.17.1.zip",
-    "version": "0.17.1"
-  },
   "designcraft": {
-    "dir": "0.17.2-z8b83c7f6",
-    "id": "8b83c7f6",
+    "dir": "0.18.0-za085158c",
+    "id": "a085158c",
     "patches": [
       {
         "patch": "zuujiscom/designcraft:fix/web-recovery-0.16",
@@ -32,88 +12,48 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/designcraft-0.17.2-z8b83c7f6",
-    "sha256": "dff3708b1642a0adc709ed2234de810a26210550ab820fb7c776d26849a38df0",
-    "source": "344be3253d53c0ef4511efa4f5110fdc3508eb10",
-    "upstream_tag": "v0.17.2",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/designcraft-0.17.2-z8b83c7f6/designcraft-web-0.17.2.zip",
-    "version": "0.17.2"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/designcraft-0.18.0-za085158c",
+    "sha256": "5e7573eb022ff0626fb69be5f4261eecdfe109d22e43d5d95160a8f82597b873",
+    "source": "72a62cf0630cf3fc8ae65f4ba72fc3b9419bc06e",
+    "upstream_tag": "v0.18.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/designcraft-0.18.0-za085158c/designcraft-web-0.18.0.zip",
+    "version": "0.18.0"
   },
   "effectcraft": {
-    "dir": "0.21.1-z85ab6c14",
-    "id": "85ab6c14",
+    "dir": "0.22.0-z8673b2ce",
+    "id": "8673b2ce",
     "patches": [
       {
         "patch": "zuujiscom/effectcraft:fix/web-0.19",
         "why": "Safari's WebGPU refuses fxn_median_huang (its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables), and since every kernel shares one module the whole GPU compositor goes; the histogram now packs 16-bit counts. Also: a second tab restored the first tab's live project and overwrote its session snapshot (one slot per site); only the first tab keeps the session now, and the second says so"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.21.1-z85ab6c14",
-    "sha256": "2b19b055cb68b46c8232804ae9e9daca27dc7c83e091721acb008ab548dd845f",
-    "source": "9a52973a8422e9a3f6828fdeb2e96e20d9f39d1b",
-    "upstream_tag": "v0.21.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/effectcraft-0.21.1-z85ab6c14/effectcraft-web-0.21.1.zip",
-    "version": "0.21.1"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.22.0-z8673b2ce",
+    "sha256": "82e78e3567ae815bdb7343d8186c4e70481cb3031066a2bda3111c15a151975d",
+    "source": "fba125ea549e0964f6b07f7fc5c09546146fa966",
+    "upstream_tag": "v0.22.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/effectcraft-0.22.0-z8673b2ce/effectcraft-web-0.22.0.zip",
+    "version": "0.22.0"
   },
   "filmcraft": {
-    "dir": "0.17.1-zd86b0a7f",
-    "id": "d86b0a7f",
+    "dir": "0.18.0-z939569cc",
+    "id": "939569cc",
     "patches": [
       {
         "patch": "zuujiscom/filmcraft:fix/opfs-write-webkit",
         "why": "Safari writes the whole wasm heap to OPFS when given a view into it, so crash-recovery snapshots and meta were 15 MB of garbage and nothing was recovered; the bytes are copied first"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.17.1-zd86b0a7f",
-    "sha256": "51d45fc3f9bd1b4dda7e710baeed6e9f6b2eaf6859f6142024f9d62bd0400110",
-    "source": "d60512bd7b02ae0bca9387856bb79c7b1a692649",
-    "upstream_tag": "v0.17.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/filmcraft-0.17.1-zd86b0a7f/filmcraft-web-0.17.1.zip",
-    "version": "0.17.1"
-  },
-  "gridcraft": {
-    "dir": "0.16.1-zc802f93e",
-    "id": "c802f93e",
-    "patches": [
-      {
-        "patch": "zuujiscom/gridcraft:fix/web-recovery-0.15",
-        "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved workbooks are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash"
-      },
-      {
-        "patch": "zuujiscom/craft-libs:web-recovery@fd0185e934",
-        "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
-      }
-    ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/gridcraft-0.16.1-zc802f93e",
-    "sha256": "008c560b619553d9837544001a5f10a4eb1d6a582227bef5b06deb2dc62cac3e",
-    "source": "b6a014f8dd6f87c68e8ccd71449df1c0df4d5a53",
-    "upstream_tag": "v0.16.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/gridcraft-0.16.1-zc802f93e/gridcraft-web-0.16.1.zip",
-    "version": "0.16.1"
-  },
-  "pdfcraft": {
-    "dir": "0.18.2-z54b96271",
-    "id": "54b96271",
-    "patches": [
-      {
-        "patch": "zuujiscom/pdfcraft:fix/web-recovery-0.17",
-        "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash; the recovery dialog no longer panics (it used std::time on wasm)"
-      },
-      {
-        "patch": "zuujiscom/craft-libs:web-recovery@fd0185e934",
-        "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
-      }
-    ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/pdfcraft-0.18.2-z54b96271",
-    "sha256": "2e7721c0f3f8f6dc92fad690adb6c96a880b500a584878cb7bbe268cbc9476b0",
-    "source": "4edef6ae88bc5bc3b1b0bff116ee4fe58dc16ab0",
-    "upstream_tag": "v0.18.2",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/pdfcraft-0.18.2-z54b96271/pdfcraft-web-0.18.2.zip",
-    "version": "0.18.2"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.18.0-z939569cc",
+    "sha256": "b6ae5889a085873d15fd3f41551d25dacdb17304a4f5a019f441cc85cde8620d",
+    "source": "a37d6f8ff52f51016de092312921e9acfa7b4243",
+    "upstream_tag": "v0.18.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/filmcraft-0.18.0-z939569cc/filmcraft-web-0.18.0.zip",
+    "version": "0.18.0"
   },
   "photocraft": {
-    "dir": "0.20.2-zab5cf630",
-    "id": "ab5cf630",
+    "dir": "0.21.0-z5485e8df",
+    "id": "5485e8df",
     "patches": [
       {
         "patch": "storytold/photocraft#10248",
@@ -128,16 +68,16 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.20.2-zab5cf630",
-    "sha256": "9956be81d5af77458bf7bf48a86998bdc50858f7520727652777f57716e725ab",
-    "source": "bf6e0966fb4499c91e9334651075c05e644b7eab",
-    "upstream_tag": "v0.20.2",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.20.2-zab5cf630/photocraft-web-0.20.2.zip",
-    "version": "0.20.2"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.21.0-z5485e8df",
+    "sha256": "ed61a032c13f4a8b4bcac06f3e5ecfb87f0a3e3bcc84f59a75a31597d05a274b",
+    "source": "69c11d1865afc4cf28fb4ef7b28b8054c0b2476e",
+    "upstream_tag": "v0.21.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.21.0-z5485e8df/photocraft-web-0.21.0.zip",
+    "version": "0.21.0"
   },
   "soundcraft": {
-    "dir": "0.17.1-za5cd9f31",
-    "id": "a5cd9f31",
+    "dir": "0.18.0-z187c032b",
+    "id": "187c032b",
     "patches": [
       {
         "patch": "zuujiscom/soundcraft:fix/web-recovery-0.16",
@@ -148,16 +88,16 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/soundcraft-0.17.1-za5cd9f31",
-    "sha256": "b4d218d0ed9fc17c8ab3794bfc0b91a641738e4a0f6cd1936c3764454b66d011",
-    "source": "90648dc6db6a5e88f7927ccdeb21efe832280a50",
-    "upstream_tag": "v0.17.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/soundcraft-0.17.1-za5cd9f31/soundcraft-web-0.17.1.zip",
-    "version": "0.17.1"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/soundcraft-0.18.0-z187c032b",
+    "sha256": "459a63a4640dffcf7b90443db06c46b246f2577d00ebdd57c23da6d859dfe97e",
+    "source": "9040dd6b6f4815206709e3529b8e125bc573c1c6",
+    "upstream_tag": "v0.18.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/soundcraft-0.18.0-z187c032b/soundcraft-web-0.18.0.zip",
+    "version": "0.18.0"
   },
   "vectorcraft": {
-    "dir": "0.21.1-z17e210bc",
-    "id": "17e210bc",
+    "dir": "0.22.0-z531ac102",
+    "id": "531ac102",
     "patches": [
       {
         "patch": "zuujiscom/vectorcraft:fix/web-recovery-0.19",
@@ -168,31 +108,11 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.21.1-z17e210bc",
-    "sha256": "7964d4362dc09ea3c1eca0643664da8aabf827e9b205302b7d049c3e455ce5c8",
-    "source": "6d5bc1c54da44c79a5e49f98c16e07ebc67348a0",
-    "upstream_tag": "v0.21.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/vectorcraft-0.21.1-z17e210bc/vectorcraft-web-0.21.1.zip",
-    "version": "0.21.1"
-  },
-  "wordcraft": {
-    "dir": "0.15.2-zd11da914",
-    "id": "d11da914",
-    "patches": [
-      {
-        "patch": "zuujiscom/wordcraft:fix/web-recovery-0.13",
-        "why": "The web build had no crash recovery: edits were lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and reopened after a reload or crash"
-      },
-      {
-        "patch": "zuujiscom/craft-libs:web-recovery@fd0185e934",
-        "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
-      }
-    ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.15.2-zd11da914",
-    "sha256": "29d068deb5d62fe43f3a066220b84874f196cbc124c10b0320b6d4dd150d92f5",
-    "source": "ab4bdee3d9133863c96c983d38a453d6650c1c69",
-    "upstream_tag": "v0.15.2",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/wordcraft-0.15.2-zd11da914/wordcraft-web-0.15.2.zip",
-    "version": "0.15.2"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.22.0-z531ac102",
+    "sha256": "fe4e9339cc0784a88569433bbde794b454461411d1a508c553a728259bc900d9",
+    "source": "75b3de6a5d28aed75cfea5fd4dc9fd58f5c0f3a2",
+    "upstream_tag": "v0.22.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/vectorcraft-0.22.0-z531ac102/vectorcraft-web-0.22.0.zip",
+    "version": "0.22.0"
   }
 }
