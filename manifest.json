@@ -20,20 +20,20 @@
     "version": "0.19.0"
   },
   "effectcraft": {
-    "dir": "0.22.0-z8673b2ce",
-    "id": "8673b2ce",
+    "dir": "0.23.0-zf5a7cf7b",
+    "id": "f5a7cf7b",
     "patches": [
       {
         "patch": "zuujiscom/effectcraft:fix/web-0.19",
         "why": "Safari's WebGPU refuses fxn_median_huang (its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables), and since every kernel shares one module the whole GPU compositor goes; the histogram now packs 16-bit counts. Also: a second tab restored the first tab's live project and overwrote its session snapshot (one slot per site); only the first tab keeps the session now, and the second says so"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.22.0-z8673b2ce",
-    "sha256": "82e78e3567ae815bdb7343d8186c4e70481cb3031066a2bda3111c15a151975d",
-    "source": "fba125ea549e0964f6b07f7fc5c09546146fa966",
-    "upstream_tag": "v0.22.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/effectcraft-0.22.0-z8673b2ce/effectcraft-web-0.22.0.zip",
-    "version": "0.22.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.23.0-zf5a7cf7b",
+    "sha256": "1ab507d9bcb7b57081dd321a347b42a160496b698cb53a35176766efcec5473d",
+    "source": "38fdaeabd9b6d32ccf8c55a41c9b53fcfd9c661e",
+    "upstream_tag": "v0.23.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/effectcraft-0.23.0-zf5a7cf7b/effectcraft-web-0.23.0.zip",
+    "version": "0.23.0"
   },
   "filmcraft": {
     "dir": "0.19.0-z822003aa",
@@ -52,8 +52,8 @@
     "version": "0.19.0"
   },
   "photocraft": {
-    "dir": "0.21.0-z5485e8df",
-    "id": "5485e8df",
+    "dir": "0.22.0-zfd29dbe2",
+    "id": "fd29dbe2",
     "patches": [
       {
         "patch": "storytold/photocraft#10248",
@@ -68,12 +68,12 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.21.0-z5485e8df",
-    "sha256": "ed61a032c13f4a8b4bcac06f3e5ecfb87f0a3e3bcc84f59a75a31597d05a274b",
-    "source": "69c11d1865afc4cf28fb4ef7b28b8054c0b2476e",
-    "upstream_tag": "v0.21.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.21.0-z5485e8df/photocraft-web-0.21.0.zip",
-    "version": "0.21.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.22.0-zfd29dbe2",
+    "sha256": "f543023f25d9e0edfe7e403addd1375ebf4b9cc632141d7e81228b266a008f2b",
+    "source": "db97c00294ca41259a6bf7c3339a5996f22b7f34",
+    "upstream_tag": "v0.22.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/photocraft-0.22.0-zfd29dbe2/photocraft-web-0.22.0.zip",
+    "version": "0.22.0"
   },
   "soundcraft": {
     "dir": "0.19.0-z56af26ce",
@@ -94,25 +94,5 @@
     "upstream_tag": "v0.19.0",
     "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/soundcraft-0.19.0-z56af26ce/soundcraft-web-0.19.0.zip",
     "version": "0.19.0"
-  },
-  "vectorcraft": {
-    "dir": "0.22.0-z531ac102",
-    "id": "531ac102",
-    "patches": [
-      {
-        "patch": "zuujiscom/vectorcraft:fix/web-recovery-0.19",
-        "why": "A crashed tab's recovery copies were only offered after three save intervals (its heartbeat still counted though its Web Lock was gone), copies lived in local storage (about 5 MB shared by every app on the site), and leaving with unsaved changes didn't ask; now offered at once, kept in IndexedDB, and leaving asks first"
-      },
-      {
-        "patch": "zuujiscom/craft-libs:web-recovery@fd0185e934",
-        "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
-      }
-    ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.22.0-z531ac102",
-    "sha256": "fe4e9339cc0784a88569433bbde794b454461411d1a508c553a728259bc900d9",
-    "source": "75b3de6a5d28aed75cfea5fd4dc9fd58f5c0f3a2",
-    "upstream_tag": "v0.22.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/vectorcraft-0.22.0-z531ac102/vectorcraft-web-0.22.0.zip",
-    "version": "0.22.0"
   }
 }
