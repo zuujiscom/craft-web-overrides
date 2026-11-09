@@ -1,7 +1,7 @@
 {
   "designcraft": {
-    "dir": "0.18.0-za085158c",
-    "id": "a085158c",
+    "dir": "0.19.0-z8812cbda",
+    "id": "8812cbda",
     "patches": [
       {
         "patch": "zuujiscom/designcraft:fix/web-recovery-0.16",
@@ -12,12 +12,12 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/designcraft-0.18.0-za085158c",
-    "sha256": "5e7573eb022ff0626fb69be5f4261eecdfe109d22e43d5d95160a8f82597b873",
-    "source": "72a62cf0630cf3fc8ae65f4ba72fc3b9419bc06e",
-    "upstream_tag": "v0.18.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/designcraft-0.18.0-za085158c/designcraft-web-0.18.0.zip",
-    "version": "0.18.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/designcraft-0.19.0-z8812cbda",
+    "sha256": "48d270f9b91896b2322717ae95d3b843d4748408153c5af2b9ad455165a58b0e",
+    "source": "38df63420f9f32d397d4d79e1bd9a8692c581e29",
+    "upstream_tag": "v0.19.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/designcraft-0.19.0-z8812cbda/designcraft-web-0.19.0.zip",
+    "version": "0.19.0"
   },
   "effectcraft": {
     "dir": "0.22.0-z8673b2ce",
@@ -36,20 +36,20 @@
     "version": "0.22.0"
   },
   "filmcraft": {
-    "dir": "0.18.0-z939569cc",
-    "id": "939569cc",
+    "dir": "0.19.0-z822003aa",
+    "id": "822003aa",
     "patches": [
       {
         "patch": "zuujiscom/filmcraft:fix/opfs-write-webkit",
         "why": "Safari writes the whole wasm heap to OPFS when given a view into it, so crash-recovery snapshots and meta were 15 MB of garbage and nothing was recovered; the bytes are copied first"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.18.0-z939569cc",
-    "sha256": "b6ae5889a085873d15fd3f41551d25dacdb17304a4f5a019f441cc85cde8620d",
-    "source": "a37d6f8ff52f51016de092312921e9acfa7b4243",
-    "upstream_tag": "v0.18.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/filmcraft-0.18.0-z939569cc/filmcraft-web-0.18.0.zip",
-    "version": "0.18.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.19.0-z822003aa",
+    "sha256": "b8823342ef75045e5d54448a62e39a256a669498d7b7fb77c32a9ee7e61d556d",
+    "source": "bc7d481cc4289b3bfe4e9787a37a466a780d35ff",
+    "upstream_tag": "v0.19.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/filmcraft-0.19.0-z822003aa/filmcraft-web-0.19.0.zip",
+    "version": "0.19.0"
   },
   "photocraft": {
     "dir": "0.21.0-z5485e8df",
@@ -76,8 +76,8 @@
     "version": "0.21.0"
   },
   "soundcraft": {
-    "dir": "0.18.0-z187c032b",
-    "id": "187c032b",
+    "dir": "0.19.0-z56af26ce",
+    "id": "56af26ce",
     "patches": [
       {
         "patch": "zuujiscom/soundcraft:fix/web-recovery-0.16",
@@ -88,12 +88,12 @@
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/soundcraft-0.18.0-z187c032b",
-    "sha256": "459a63a4640dffcf7b90443db06c46b246f2577d00ebdd57c23da6d859dfe97e",
-    "source": "9040dd6b6f4815206709e3529b8e125bc573c1c6",
-    "upstream_tag": "v0.18.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/soundcraft-0.18.0-z187c032b/soundcraft-web-0.18.0.zip",
-    "version": "0.18.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/soundcraft-0.19.0-z56af26ce",
+    "sha256": "02a3391cc35b1743a2edb543f3156e0f4bb80e5729e49c28ea86b53d90d33265",
+    "source": "da87c3e8fedcd3698b550f68c1b295a8b48c3e19",
+    "upstream_tag": "v0.19.0",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/soundcraft-0.19.0-z56af26ce/soundcraft-web-0.19.0.zip",
+    "version": "0.19.0"
   },
   "vectorcraft": {
     "dir": "0.22.0-z531ac102",
