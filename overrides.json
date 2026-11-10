@@ -37,7 +37,7 @@
     "vectorcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/vectorcraft:fix/web-recovery-0.19",
+          "branch": "zuujiscom/vectorcraft:fix/web-recovery-0.23",
           "why": "A crashed tab's recovery copies were only offered after three save intervals (its heartbeat still counted though its Web Lock was gone), copies lived in local storage (about 5 MB shared by every app on the site), and leaving with unsaved changes didn't ask; now offered at once, kept in IndexedDB, and leaving asks first"
         }
       ]
@@ -45,7 +45,7 @@
     "wordcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/wordcraft:fix/web-recovery-0.13",
+          "branch": "zuujiscom/wordcraft:fix/web-recovery-0.17",
           "why": "The web build had no crash recovery: edits were lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and reopened after a reload or crash"
         }
       ]
@@ -53,7 +53,7 @@
     "deckcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/deckcraft:fix/web-recovery-0.14",
+          "branch": "zuujiscom/deckcraft:fix/web-recovery-0.17",
           "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved presentations are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash"
         }
       ]
@@ -69,7 +69,7 @@
     "cadcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/cadcraft:fix/web-recovery-0.16",
+          "branch": "zuujiscom/cadcraft:fix/web-recovery-0.19",
           "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved drawings are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash in Drawing Recovery; also, a restored profile no longer makes the new empty drawing look unsaved"
         }
       ]
@@ -77,7 +77,7 @@
     "gridcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/gridcraft:fix/web-recovery-0.15",
+          "branch": "zuujiscom/gridcraft:fix/web-recovery-0.18",
           "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved workbooks are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash"
         }
       ]
@@ -85,7 +85,7 @@
     "pdfcraft": {
       "patches": [
         {
-          "branch": "zuujiscom/pdfcraft:fix/web-recovery-0.17",
+          "branch": "zuujiscom/pdfcraft:fix/web-recovery-0.20",
           "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved documents are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash; the recovery dialog no longer panics (it used std::time on wasm)"
         }
       ]

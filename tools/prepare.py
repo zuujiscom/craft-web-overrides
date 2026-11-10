@@ -121,7 +121,9 @@ def main():
         label, commits = patch_commits(a.src, a.app, patch)
         # `git cherry` marks a commit whose change is already in the release with "-".
         present = {line[2:] for line in git(a.src, "cherry", "HEAD", commits[-1], f"{commits[0]}~1").stdout.splitlines() if line.startswith("- ")} if commits else set()
-        todo = [c for c in commits if c not in present]
+        # A patch based on a release tag that sits off main ("Release x.y.z" commits) carries that
+        # tag's own commits too; they are already in the release.
+        todo = [c for c in commits if c not in present and not is_ancestor(a.src, c, tag)]
         if not todo:
             dropped.append({"patch": label, "reason": f"already in {tag}"})
             continue
