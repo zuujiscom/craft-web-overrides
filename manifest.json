@@ -20,20 +20,20 @@
     "version": "0.19.0"
   },
   "effectcraft": {
-    "dir": "0.23.0-zf5a7cf7b",
-    "id": "f5a7cf7b",
+    "dir": "0.23.1-zb80cc172",
+    "id": "b80cc172",
     "patches": [
       {
         "patch": "zuujiscom/effectcraft:fix/web-0.19",
         "why": "Safari's WebGPU refuses fxn_median_huang (its 2048-entry histogram is over WebKit's 8192-byte limit on a function's variables), and since every kernel shares one module the whole GPU compositor goes; the histogram now packs 16-bit counts. Also: a second tab restored the first tab's live project and overwrote its session snapshot (one slot per site); only the first tab keeps the session now, and the second says so"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.23.0-zf5a7cf7b",
-    "sha256": "1ab507d9bcb7b57081dd321a347b42a160496b698cb53a35176766efcec5473d",
-    "source": "38fdaeabd9b6d32ccf8c55a41c9b53fcfd9c661e",
-    "upstream_tag": "v0.23.0",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/effectcraft-0.23.0-zf5a7cf7b/effectcraft-web-0.23.0.zip",
-    "version": "0.23.0"
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.23.1-zb80cc172",
+    "sha256": "aab9259fda4866e0a7814f40e4da374b8ccba2e90d7f5b4eb3e3623f143639a1",
+    "source": "242449153607a5f01945e9f30925fb5631b09fe8",
+    "upstream_tag": "v0.23.1",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/effectcraft-0.23.1-zb80cc172/effectcraft-web-0.23.1.zip",
+    "version": "0.23.1"
   },
   "filmcraft": {
     "dir": "0.19.0-z822003aa",
