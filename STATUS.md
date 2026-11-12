@@ -1,31 +1,28 @@
 # Status
 
-Last run 2026-11-11 17:37 UTC.
+Last run 2026-11-12 01:13 UTC.
 
 | App | Result |
 | --- | --- |
-| cadcraft | built cadcraft-0.20.0-z40d3f210 |
-| deckcraft | built deckcraft-0.18.0-z245e8ee8 |
-| designcraft | built designcraft-0.20.0-z15611ca1 |
-| effectcraft | built effectcraft-0.24.0-z70e5385e |
-| filmcraft | built filmcraft-0.20.0-z66cab17b |
-| gridcraft | built gridcraft-0.19.0-z5f8e379b |
-| pdfcraft | unchanged: 0.20.0-z71aed40e |
-| photocraft | unchanged: 0.22.0-zfd29dbe2 |
-| soundcraft | unchanged: 0.19.0-z56af26ce |
-| vectorcraft | unchanged: 0.23.0-z20fb6ec9 |
-| wordcraft | unchanged: 0.17.0-z600e5b8a |
+| cadcraft | built cadcraft-0.20.1-z50330c91 |
+| deckcraft | built deckcraft-0.18.1-z6f650153 |
+| designcraft | built designcraft-0.20.1-z852b4416 |
+| effectcraft | failed: no result (see the run log); serving storytold's release |
+| filmcraft | built filmcraft-0.20.1-zc2317071 |
+| gridcraft | built gridcraft-0.19.1-z80c42db7 |
+| pdfcraft | built pdfcraft-0.21.0-z1084229b |
+| photocraft | built photocraft-0.23.0-z51f04bda |
+| soundcraft | failed: no result (see the run log); serving storytold's release |
+| vectorcraft | failed: no result (see the run log); serving storytold's release |
+| wordcraft | built wordcraft-0.18.1-za940e45b |
 
 ## Served
 
-- **cadcraft** 0.20.0-z40d3f210 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/cadcraft-0.20.0-z40d3f210)): zuujiscom/cadcraft:fix/web-recovery-0.19; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **deckcraft** 0.18.0-z245e8ee8 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/deckcraft-0.18.0-z245e8ee8)): zuujiscom/deckcraft:fix/web-recovery-0.17; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **designcraft** 0.20.0-z15611ca1 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/designcraft-0.20.0-z15611ca1)): zuujiscom/designcraft:fix/web-recovery-0.16; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **effectcraft** 0.24.0-z70e5385e ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/effectcraft-0.24.0-z70e5385e)): zuujiscom/effectcraft:fix/web-0.19
-- **filmcraft** 0.20.0-z66cab17b ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.20.0-z66cab17b)): zuujiscom/filmcraft:fix/opfs-write-webkit
-- **gridcraft** 0.19.0-z5f8e379b ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/gridcraft-0.19.0-z5f8e379b)): zuujiscom/gridcraft:fix/web-recovery-0.18; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **pdfcraft** 0.20.0-z71aed40e ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/pdfcraft-0.20.0-z71aed40e)): zuujiscom/pdfcraft:fix/web-recovery-0.20; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **photocraft** 0.22.0-zfd29dbe2 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.22.0-zfd29dbe2)): storytold/photocraft#10248; zuujiscom/photocraft:fix/web-crash-recovery-0.18; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **soundcraft** 0.19.0-z56af26ce ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/soundcraft-0.19.0-z56af26ce)): zuujiscom/soundcraft:fix/web-recovery-0.16; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **vectorcraft** 0.23.0-z20fb6ec9 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/vectorcraft-0.23.0-z20fb6ec9)): zuujiscom/vectorcraft:fix/web-recovery-0.23; zuujiscom/craft-libs:web-recovery@fd0185e934
-- **wordcraft** 0.17.0-z600e5b8a ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.17.0-z600e5b8a)): zuujiscom/wordcraft:fix/web-recovery-0.17; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **cadcraft** 0.20.1-z50330c91 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/cadcraft-0.20.1-z50330c91)): zuujiscom/cadcraft:fix/web-recovery-0.19; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **deckcraft** 0.18.1-z6f650153 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/deckcraft-0.18.1-z6f650153)): zuujiscom/deckcraft:fix/web-recovery-0.17; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **designcraft** 0.20.1-z852b4416 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/designcraft-0.20.1-z852b4416)): zuujiscom/designcraft:fix/web-recovery-0.16; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **filmcraft** 0.20.1-zc2317071 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.20.1-zc2317071)): zuujiscom/filmcraft:fix/opfs-write-webkit
+- **gridcraft** 0.19.1-z80c42db7 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/gridcraft-0.19.1-z80c42db7)): zuujiscom/gridcraft:fix/web-recovery-0.18; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **pdfcraft** 0.21.0-z1084229b ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/pdfcraft-0.21.0-z1084229b)): zuujiscom/pdfcraft:fix/web-recovery-0.20; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **photocraft** 0.23.0-z51f04bda ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/photocraft-0.23.0-z51f04bda)): storytold/photocraft#10248; zuujiscom/photocraft:fix/web-crash-recovery-0.18; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **wordcraft** 0.18.1-za940e45b ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/wordcraft-0.18.1-za940e45b)): zuujiscom/wordcraft:fix/web-recovery-0.17; zuujiscom/craft-libs:web-recovery@fd0185e934
