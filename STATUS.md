@@ -1,6 +1,6 @@
 # Status
 
-Last run 2026-11-12 12:01 UTC.
+Last run 2026-11-12 20:25 UTC.
 
 | App | Result |
 | --- | --- |
@@ -10,8 +10,8 @@ Last run 2026-11-12 12:01 UTC.
 | effectcraft | failed: no result (see the run log); serving storytold's release |
 | filmcraft | unchanged: 0.20.1-zc2317071 |
 | gridcraft | unchanged: 0.19.1-z80c42db7 |
-| pdfcraft | built pdfcraft-0.21.1-zb60407e8 |
-| photocraft | built photocraft-0.23.1-z9cb81798 |
+| pdfcraft | unchanged: 0.21.1-zb60407e8 |
+| photocraft | unchanged: 0.23.1-z9cb81798 |
 | soundcraft | failed: no result (see the run log); serving storytold's release |
 | vectorcraft | failed: no result (see the run log); serving storytold's release |
 | wordcraft | unchanged: 0.18.1-za940e45b |
