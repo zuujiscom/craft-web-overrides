@@ -1,22 +1,26 @@
 {
   "cadcraft": {
-    "dir": "0.20.1-z50330c91",
-    "id": "50330c91",
+    "dir": "0.20.1-zaf08d798",
+    "id": "af08d798",
     "patches": [
       {
         "patch": "zuujiscom/cadcraft:fix/web-recovery-0.19",
         "why": "The web build had no crash recovery: unsaved work was lost on reload. Unsaved drawings are copied to IndexedDB (craft-web-recovery) and offered back after a reload or crash in Drawing Recovery; also, a restored profile no longer makes the new empty drawing look unsaved"
       },
       {
+        "patch": "zuujiscom/cadcraft:fix/web-dwg-0.20",
+        "why": "The web build refused DWG files: DWG and DWT drawings now open and save (storytold/cadcraft#2512, ported to 0.20.1), and Save writes an opened drawing back under its own name and format"
+      },
+      {
         "patch": "zuujiscom/craft-libs:web-recovery@fd0185e934",
         "why": "craft-web-recovery: crash-recovery copies of unsaved documents in the browser (IndexedDB, one Web Lock per tab, counted only after commit), the unload guard and download helpers; shared by every app's web save fixes, not in storytold's craft-libs yet (storytold/craft-libs#124)"
       }
     ],
-    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/cadcraft-0.20.1-z50330c91",
-    "sha256": "410e22233c4e1e9e9cf443c31c69c6e15db5fe49d062ed18b7e968a9db54972a",
-    "source": "cf3e12b24d6a5ebf771cb78040a6437930aa1d13",
+    "release": "https://github.com/zuujiscom/craft-web-overrides/releases/tag/cadcraft-0.20.1-zaf08d798",
+    "sha256": "5dba82413a8502a3a06fbea3b611b23cf50c1c0de0e90cb8355b1198a93011c9",
+    "source": "38c79845056f4a7fd9ca8fbf24af901c872f8894",
     "upstream_tag": "v0.20.1",
-    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/cadcraft-0.20.1-z50330c91/cadcraft-web-0.20.1.zip",
+    "url": "https://github.com/zuujiscom/craft-web-overrides/releases/download/cadcraft-0.20.1-zaf08d798/cadcraft-web-0.20.1.zip",
     "version": "0.20.1"
   },
   "deckcraft": {

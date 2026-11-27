@@ -1,10 +1,10 @@
 # Status
 
-Last run 2026-11-12 20:25 UTC.
+Last run 2026-11-27 01:03 UTC.
 
 | App | Result |
 | --- | --- |
-| cadcraft | unchanged: 0.20.1-z50330c91 |
+| cadcraft | built cadcraft-0.20.1-zaf08d798 |
 | deckcraft | unchanged: 0.18.1-z6f650153 |
 | designcraft | unchanged: 0.20.1-z852b4416 |
 | effectcraft | failed: no result (see the run log); serving storytold's release |
@@ -18,7 +18,7 @@ Last run 2026-11-12 20:25 UTC.
 
 ## Served
 
-- **cadcraft** 0.20.1-z50330c91 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/cadcraft-0.20.1-z50330c91)): zuujiscom/cadcraft:fix/web-recovery-0.19; zuujiscom/craft-libs:web-recovery@fd0185e934
+- **cadcraft** 0.20.1-zaf08d798 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/cadcraft-0.20.1-zaf08d798)): zuujiscom/cadcraft:fix/web-recovery-0.19; zuujiscom/cadcraft:fix/web-dwg-0.20; zuujiscom/craft-libs:web-recovery@fd0185e934
 - **deckcraft** 0.18.1-z6f650153 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/deckcraft-0.18.1-z6f650153)): zuujiscom/deckcraft:fix/web-recovery-0.17; zuujiscom/craft-libs:web-recovery@fd0185e934
 - **designcraft** 0.20.1-z852b4416 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/designcraft-0.20.1-z852b4416)): zuujiscom/designcraft:fix/web-recovery-0.16; zuujiscom/craft-libs:web-recovery@fd0185e934
 - **filmcraft** 0.20.1-zc2317071 ([release](https://github.com/zuujiscom/craft-web-overrides/releases/tag/filmcraft-0.20.1-zc2317071)): zuujiscom/filmcraft:fix/opfs-write-webkit
